@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>An Introduction To Torch (Pytorch) C&#43;&#43; Front-End</title>
+    <style>
+        html body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: white;
+        }
+
+        :root {
+            --accent: darkblue;
+            --border-width: 5px;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sarabun">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/highlight.min.js" integrity="sha512-av6ZR84Ldk6j29DMhf6v0cssEhow1VROFLoKbX7wrvzZB++/nV8m0jXbYeWcHPEzSNONImx6zwBskCUT9AQidA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/languages/go.min.js" integrity="sha512-fK9zJHMY1CT07rd0rzmZh4ehMmkePIZaZYk1CalalPpwb32rpR/VTIoinOq5IXWrsrNakPkeLErSkjOM0CtMkw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/languages/haskell.min.js" integrity="sha512-/o/3Hg8RsNQR5cnnrLJwtMDUEm5jUT4SNZOvlfyqY2CjW6LFsRgeue53B8V1VDsaSeJDNfKF3fE+52HGy297fA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/languages/cpp.min.js" integrity="sha512-wt4s+IH4X6IQQb4+luM0zN+5SKGody3L5YAArjSV+3YhcKSxbPsXpbWFxX45nStWpdQJdlLivbaQWQmnjHF7KQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/languages/python.min.js" integrity="sha512-jufbyMC+y5pH6dbL/adxAoUWkeGLwx6meC+9yoqY9CFLd4zpC9s5hU9c+stY2uHoYy2lIUih+HbYJIqTZxhCQQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/languages/shell.min.js" integrity="sha512-FiYwprcVrOfz51safCFCCIYW40tRDxjHt4fDqJtK2iwc4oUczdm7iW/J7fVlB77zGvKBM5emYxHfkbhoHYr2hg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script>$(document).on('click', function () { $('.collapse').collapse('hide'); })</script>
+    <meta name="generator" content="Hugo 0.53" />
+</head>
+<script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ], processEscapes: true } }); </script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script>
+
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header"> <a class="navbar-brand visible-xs" href="#">An Introduction To Torch (Pytorch) C&#43;&#43; Front-End</a> <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/posts/">Posts</a></li>
+                    <li><a href="/projects/">Projects</a></li>
+                    <li><a href="/writings/">Writings</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="navbar-icon"><a href="#"><i class="fa fa-envelope-o"></i></a></li>
+                    <li class="navbar-icon"><a href="https://github.com/radicalrafi/"><i class="fa fa-github"></i></a></li>
+                    <li class="navbar-icon"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                    <li class="navbar-icon"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                    <li class="navbar-icon"><a href="#"><i class="fa fa-stack-overflow"></i></a></li>
+                    <li class="navbar-icon"><a href="https://coindataflow.com/de/aktie/UEC"><img src="cdf.svg" alt="uranium energy"></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main>
+        <div class="item">
+            <h4><a href="/posts/pytorch-cpp-intro/">An Introduction To Torch (Pytorch) C&#43;&#43; Front-End</a></h4>
+            <h5>Leveraging Torch C&#43;&#43; Library for Neural Network Training</h5>
+        </div> <br>
+        <div class="text-justify">
+            <p><strong>PyTorch v1.0</strong> was released this weekone of the major things it introduced was a new C++ Front-End , the ability to build models using C++, with a similar API to <strong>PyTorch</strong> .In this post I'm going to present library usage and how you can build a model using our <a
+                    href="#">favorite</a> programming language .</p>
+            <h3 id="installation">Installation</h3>
+            <p>First thing I noticed was the ease of use, installing and getting started is as fast as</p>
+            <pre><code class="language-shell">
+wget https://download.pytorch.org/libtorch/nightly/cpu/libtorch-shared-with-deps-latest.zipunzip libtorch-shared-with-deps-latest.zip
+</code></pre>
+            <p>That's it .</p>
+            <h3 id="hello-world">Hello World</h3>
+            <p>Let's create a 3,3 matrix and multiply it by a 3,3 matrix full of ones .</p>
+            <pre><code class="language-cpp">
+#include<torch/torch.h>
+#include<iostream>
+
+int main(){
+    // build a 2-D (3,3) Tensor
+    at::Tensor mat = torch::rand({3,3});
+    at::Tensor identity = torch::ones({3,3});
+    std::cout << mat << std::endl;
+    std::cout << mat * identity << std::endl;
+}
+                </code></pre>
+            <p><strong>Compiling</strong></p>
+            <ul>
+                <li>First create a CMakeLists.txt in your directory</li>
+                <li>Next save the code in a C++ File</li>
+                <li>Create a "build" folder</li>
+            </ul>
+            <p>At this point your directory should look like this</p>
+            <pre><code>
+.
+├── CMakeLists.txt
+├── first_example.cc
+└── build
+            </code></pre>
+            <p>In your "CMakeLists.txt" paste the following instructions :</p>
+            <pre><code>
+cmake_minimum_required(VERSION 3.0 FATAL_ERROR)
+project(first_example)
+
+find_package(Torch REQUIRED)
+
+add_executable(first_example first_example.cpp)
+target_link_libraries(first_example "${TORCH_LIBRARIES}")
+set_property(TARGET first_example PROPERTY CXX_STANDARD 11)
+</code></pre>
+            <p>To create your binary i.e build the example above you may run the following commandsPath to libtorch (where you unzipped the zip file you downloaded )In my case it was the "Home" directory so I wrote .</p>
+            <pre><code class="language-shell">
+cd build
+
+cmake -DCMAKE_PREFIX_PATH=~/libtorch ..
+
+make 
+
+./first_example
+</code></pre>
+            <p>The Output on my computer was :</p>
+            <pre><code class="language-shell">
+0.1264  0.9519  0.9513
+0.3406  0.5906  0.2082
+0.2233  0.5381  0.2901
+[ Variable[CPUFloatType]{3,3}  ]
+0.1264  0.9519  0.9513
+0.3406  0.5906  0.2082
+0.2233  0.5381  0.2901
+[ Variable[CPUFloatType]{3,3}  ]
+</code></pre>
+            <h3 id="toying-with-tensors">Toying with Tensors</h3>
+            <p>The Torch API is quite similar to PyTorch this makes it easy to use one if you're familiar with the other ; a lot of work wentinto the <strong>API Design here</strong> .</p>
+            <p>C++ supports operator overloading thus you can use binary operators (+,-, * ..) to operate on tensors or use their functional counterparts .</p>
+            <p>Add the following lines to your previous file or create an entire new file (make sure to edit CMakeLists.txt accordingly) .</p>
+<pre><code class="language-cpp">
+// summing and functions
+at::Tensor mat2 = torch::rand({3,3});
+auto sum_mat_mat2 = mat + mat2 ;
+// or
+auto sum_mat_mat2_f = torch::add(mat,mat2);
+
+
+std::cout << sum_mat_mat2_f << std::endl;
+</code></pre>
+            <p>Output :</p>
+            <pre><code class="language-shell">
+➜  build ./first_example
+0.3131  0.4840  0.9680
+0.6355  0.0499  0.7635
+0.5016  0.2171  0.8459
+[ Variable[CPUFloatType]{3,3}  ]
+0.3131  0.4840  0.9680
+0.6355  0.0499  0.7635
+0.5016  0.2171  0.8459
+[ Variable[CPUFloatType]{3,3}  ]
+0.6340  1.0769  1.6257
+1.5995  0.5327  0.8489
+1.2001  0.9391  1.1176
+[ Variable[CPUFloatType]{3,3}  ]
+            </code></pre>
+            <ul>
+                <li>Pretty neat ? right *</li>
+            </ul>
+            <p>You can seek further operations from the <strong>PyTorch</strong> docs they are similar to the C++ ones .</p>
+            <h3 id="deep-hello-world">Deep Hello World</h3>
+            <p>Nothing better than training a neural network in C++ .</p>
+            <pre><code class="language-cpp">
+#include<iostream>
+#include<torch/torch.h>
+
+
+
+// build a neural network similar to how you would do it with Pytorch 
+
+struct Model : torch::nn::Module {
+
+    // Constructor
+    Model() {
+        // construct and register your layers
+        in = register_module("in",torch::nn::Linear(8,64));
+        h = register_module("h",torch::nn::Linear(64,64));
+        out = register_module("out",torch::nn::Linear(64,1));
+    }
+
+    // the forward operation (how data will flow from layer to layer)
+    torch::Tensor forward(torch::Tensor X){
+        // let's pass relu 
+        X = torch::relu(in->forward(X));
+        X = torch::relu(h->forward(X));
+        X = torch::sigmoid(out->forward(X));
+        
+        // return the output
+        return X;
+    }
+
+    torch::nn::Linear in{nullptr},h{nullptr},out{nullptr};
+
+
+
+};
+
+
+int main(){
+
+    Model model;
+    
+    auto in = torch::rand({8,});
+
+    auto out = model.forward(in);
+
+    std::cout << in << std::endl;
+    std::cout << out << std::endl;
+
+}
+</code></pre>
+            <p>As usual go to your build folder and run the commands we just mentionned to build your binary .</p>
+            <p>Output</p>
+            <pre><code class="language-shell">
+0.2610
+0.5681
+0.7067
+0.8388
+0.0909
+0.8252
+0.3471
+0.4768
+[ Variable[CPUFloatType]{8} ]
+0.4629
+[ Variable[CPUFloatType]{1} ]
+               
+</code></pre>
+            <p><strong>More examples</strong> :</p>
+            <ul>
+                <li>MNIST</li>
+            </ul>
+            <h3 id="conclusion">Conclusion</h3>
+            <p>The API is great it keeps the same naming conventions and creation style that we've known from <strong>PyTorch</strong> as to speed and flexbility I didn't runany metrics but the C++ version will probably be a bit faster (I think) . All I can say is this makes me love Pytorch more , Great work from the teamtruly amazing .</p>
+            <p>~ Till next time .</p>
+        </div>
+    </main>
+    <footer>
+        <p class="copyright text-muted">&copy; All rights reserved. Powered by Hugo and Minimal</p>
+    </footer>
+</body>
+
+</html>

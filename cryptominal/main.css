@@ -1,0 +1,30 @@
+.title{
+    color:whitesmoke;
+    font-size:56px;
+
+}
+
+body{
+    background-color:black; 
+}
+.num{
+    color:gold;
+    font-size: 56px
+}
+
+.val{
+    color:goldenrod;
+    
+
+}
+
+.box{
+    display:flex;
+    border:1px solid;
+    border-color: gainsboro;
+    border-top-width: 15px;
+    margin:5px;
+    padding-left:5px;
+    width:285px;
+    color:ghostwhite
+}

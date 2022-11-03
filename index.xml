@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title></title>
+    <link>https://radicalrafi.github.io/</link>
+    <description>Recent content on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 24 Jan 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://radicalrafi.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Gomorph</title>
+      <link>https://radicalrafi.github.io/projects/gomorph/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://radicalrafi.github.io/projects/gomorph/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Machine Learning for Malware Classification</title>
+      <link>https://radicalrafi.github.io/projects/ml-malware/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://radicalrafi.github.io/projects/ml-malware/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>deep-learning-notes</title>
+      <link>https://radicalrafi.github.io/projects/deep-notes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://radicalrafi.github.io/projects/deep-notes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ff</title>
+      <link>https://radicalrafi.github.io/projects/ff/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://radicalrafi.github.io/projects/ff/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>math4ml</title>
+      <link>https://radicalrafi.github.io/projects/math-ml/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://radicalrafi.github.io/projects/math-ml/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mutensor</title>
+      <link>https://radicalrafi.github.io/projects/mutensor/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://radicalrafi.github.io/projects/mutensor/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>numerical-solvers</title>
+      <link>https://radicalrafi.github.io/projects/numsolvers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://radicalrafi.github.io/projects/numsolvers/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Parsing Binary File Formats : Forbidden Arts</title>
+      <link>https://radicalrafi.github.io/posts/parsing-binary-formats/</link>
+      <pubDate>Thu, 24 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://radicalrafi.github.io/posts/parsing-binary-formats/</guid>
+      <description>The computing/programming field contains a lot of these small tasks or things that fall under what I call forbidden arts, forbidden is a bad word dark maybe better, because unless you&amp;rsquo;re put into a situation that requires it from you, you have less than 1% probability of actually doing/needing to do it.
+My first encounter with this problem has been a year and half ago, while building a project. Using an open-source solution is often possible and best, but then you need to do the task for 10,000,000 files and Python isn&amp;rsquo;t really made for it.</description>
+    </item>
+    
+    <item>
+      <title>Graph Theory 101</title>
+      <link>https://radicalrafi.github.io/posts/graph-theory-1/</link>
+      <pubDate>Mon, 21 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://radicalrafi.github.io/posts/graph-theory-1/</guid>
+      <description>Graph theory is a field of discrete mathematics, discrete in the sense that the structures we deal with are distinct and are not subject to properties of closeness such as continuity.Graph theory is one of the notable branches in mathematics.It can be used to model different kinds of problems and is also one of the fields with the most open problems.
+In this series of posts I will give a technical exposition to graph theory, discuss few ideas and also show you a parable about proofs in mathematics.</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; The Good The Bad and The Ugly</title>
+      <link>https://radicalrafi.github.io/posts/cpp-good-bad-ugly/</link>
+      <pubDate>Wed, 09 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://radicalrafi.github.io/posts/cpp-good-bad-ugly/</guid>
+      <description>In a perfect word every blog should have a post to criticize C++. I personally find myself in a hard situation. I am in my last year of undergraduate school in Applied Mathematics thus am looking for career opportunities and C++ is in demand. So I end up using it and not using it,in the sense that outside of a single file or maybe tiny project C++ you&amp;rsquo;ll find yourself less productive.</description>
+    </item>
+    
+    <item>
+      <title>A Blogroll, or my favorite blogs</title>
+      <link>https://radicalrafi.github.io/writings/favorite-blogs/</link>
+      <pubDate>Sat, 05 Jan 2019 11:17:08 +0000</pubDate>
+      
+      <guid>https://radicalrafi.github.io/writings/favorite-blogs/</guid>
+      <description> https://slatestarcodex.com/ https://lesswrong.com/ http://lukemuehlhauser.com/ my hero http://mindingourway.com/ https://colah.github.io/ https://iamtrask.github.io/ http://www.wildml.com/ http://blog.samaltman.com/ https://blog.janestreet.com/ http://cdixon.org/ https://putanumonit.com/  </description>
+    </item>
+    
+    <item>
+      <title>Book Reviews: Mathematics</title>
+      <link>https://radicalrafi.github.io/writings/book-reviews-math/</link>
+      <pubDate>Sat, 05 Jan 2019 11:17:08 +0000</pubDate>
+      
+      <guid>https://radicalrafi.github.io/writings/book-reviews-math/</guid>
+      <description>First semester is over and with it I think it&amp;rsquo;s time to give a review of books I read over it&amp;rsquo;s course with few extra books I liked from previous years. This isn&amp;rsquo;t an amazon review this is just a page that may help a future student start somewhere this my personal opinion about the books and approaches may differ.
+Set Theory I&amp;rsquo;ll point you the MIRI&amp;rsquo;s recommended book Naive Set Theory.</description>
+    </item>
+    
+    <item>
+      <title>An Introduction To Torch (Pytorch) C&#43;&#43; Front-End</title>
+      <link>https://radicalrafi.github.io/posts/pytorch-cpp-intro/</link>
+      <pubDate>Fri, 05 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://radicalrafi.github.io/posts/pytorch-cpp-intro/</guid>
+      <description>PyTorch v1.0 was released this week one of the major things it introduced was a new C++ Front-End , the ability to build models using C++, with a similar API to PyTorch . In this post I&amp;rsquo;m going to present library usage and how you can build a model using our favorite programming language .
+Installation First thing I noticed was the ease of use, installing and getting started is as fast as</description>
+    </item>
+    
+    <item>
+      <title>Deep Learning Scribbling : Deep Learning Frameworks I</title>
+      <link>https://radicalrafi.github.io/posts/deep-learning-scriblling-1/</link>
+      <pubDate>Sun, 23 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://radicalrafi.github.io/posts/deep-learning-scriblling-1/</guid>
+      <description>This is a series of posts about deep learning, not how to classify Fashion MNIST but more on how to use the science and it&amp;rsquo;s tools . I will discuss Frameworks, Architecturing, Solving Problems and a Bunch of flash notes for things that we forget about , alas we are not machines .
+Deep Learning Frameworks Deep Learning frameworks are quite interesting, because they require a very hardcore feat of engineering in between providing cross-platform software, ultra-fast computation, numerical correction and most of all a PYTHON interface .</description>
+    </item>
+    
+    <item>
+      <title>Reinventing The Ductape and The Creation of Opensource</title>
+      <link>https://radicalrafi.github.io/writings/ductape-factory/</link>
+      <pubDate>Sat, 22 Sep 2018 11:17:08 +0000</pubDate>
+      
+      <guid>https://radicalrafi.github.io/writings/ductape-factory/</guid>
+      <description>Inventing a better duct tape for a duct-tape solvable situation . Duct tape is one of those inventions that we really don&amp;rsquo;t think about they seem obvious in hindsight ; oh . Like the wheel or the glass or the table , duct tape is an all-things invention that fits in many situations , yet we can&amp;rsquo;t really think of a reinvention of it because it&amp;rsquo;s really at the lowest tier of the inventions pyramid .</description>
+    </item>
+    
+    <item>
+      <title>Crypto Journal Part III : Fully Homomorphic Encryption Part I : Secret Key Homomorphic Encryption Over Integers</title>
+      <link>https://radicalrafi.github.io/posts/more-homomorphic-encryption/</link>
+      <pubDate>Wed, 18 Apr 2018 00:32:10 +0000</pubDate>
+      
+      <guid>https://radicalrafi.github.io/posts/more-homomorphic-encryption/</guid>
+      <description>EP In the previous post we discussed homomorphic encryption in it&amp;rsquo;s most abstract terms we presented Paillier as a partially homomorphic encryption . Thank you @mortendahlcs for making a clarification about the terms described :
+ Somewhat Homomorphic means you can do both addition and multiplication but only a limited number times ( I will explain why below) Paillier doesn&amp;rsquo;t allow multiplication between two ciphers this is called a Partially Homomorphic scheme .</description>
+    </item>
+    
+    <item>
+      <title>Crypto Journal Part II : Homomorphic Encryption</title>
+      <link>https://radicalrafi.github.io/posts/homomorphic-encryption/</link>
+      <pubDate>Fri, 13 Apr 2018 09:19:23 +0000</pubDate>
+      
+      <guid>https://radicalrafi.github.io/posts/homomorphic-encryption/</guid>
+      <description>Starting Words This post covers homomorphic encryption with an introductory perspective then shows example of two schemes the math is kept to a minimum but some terms that are used a lot need to be explained at first , every paper is referenced at the end of the post . A Later blogpost will look at other schemes and discuss the idea of bootstraping circuits .
+ Group : A Group in mathematics is the most basic algebraic structure , it&amp;rsquo;s simply a set (a bunch of numbers) and an operation (addition,multiplication&amp;hellip;) that fits certain criterias or axioms .</description>
+    </item>
+    
+    <item>
+      <title>Crypto Journal Part I : Secret Sharing</title>
+      <link>https://radicalrafi.github.io/posts/secret-sharing/</link>
+      <pubDate>Fri, 06 Apr 2018 22:18:03 +0000</pubDate>
+      
+      <guid>https://radicalrafi.github.io/posts/secret-sharing/</guid>
+      <description>I wrote this blogpost on an 18 hour trip :) that I take once or twice a year to go home . I&amp;rsquo;ve been lately spending more time studying the mathematical foundations of cryptography, and a blog was deemed necessary to move from the theoretical to the intuitive.
+Cryptography started as a casual reading and puzzles,then it became a target and now a passion .
+In a series of blogpost I&amp;rsquo;ll try to explain in an intuitive way what I find the most interesting parts in cryptography I have no idea how long the series will span but let&amp;rsquo;s just say that it would be at least 3 blogposts long .</description>
+    </item>
+    
+    <item>
+      <title>Convolutional Neural Networks Intuition and Implementation</title>
+      <link>https://radicalrafi.github.io/posts/intuitive-cnn/</link>
+      <pubDate>Fri, 23 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://radicalrafi.github.io/posts/intuitive-cnn/</guid>
+      <description>The CNN The Feed Forward neural network is composed of fully connected neurons at each layer, the input is a flattened vector that is feed to the input neurons the network then is restricted from an information point of view .
+Because pictures are composed of hiearchies, an image only provides full information if seen in it&amp;rsquo;s 2D view (3D actually) add to that the fact that colored images introduce a third dimension (color channel) that encodes more information , it will soon become evident that it&amp;rsquo;s infeasible to scale simple FFN to this task we need a new way to extract features .</description>
+    </item>
+    
+    <item>
+      <title>Functional Go : Taking The Gopher to it&#39;s extremes</title>
+      <link>https://radicalrafi.github.io/posts/functional-go/</link>
+      <pubDate>Thu, 22 Mar 2018 13:17:02 +0000</pubDate>
+      
+      <guid>https://radicalrafi.github.io/posts/functional-go/</guid>
+      <description>The Functional Paradigm Functional Programming is based on simple rules that aim to make programs consistent and makes parallelism humane and easy, functions are pure they don&amp;rsquo;t mutate state , objects are immutable ,no shared state ,code is declarative , a computation is nothing but an evaluation of mathematical functions .
+Let&amp;rsquo;s see an example of a function in a purely functional language :
+isPalindrome :: (Eq a) =&amp;gt; [a] -&amp;gt; Bool isPalindrome x = x == reverse x  The code above is the haskell version of the palindrome function we all implemented at some point by looping trough the list and checking &amp;hellip; In Haskell isPalindrome takes a list of chars that derives Equality (think can be compared) and returns a bool (True or False) .</description>
+    </item>
+    
+    <item>
+      <title>Comfy Deep Learning</title>
+      <link>https://radicalrafi.github.io/posts/comfy-deep-learning/</link>
+      <pubDate>Tue, 21 Nov 2017 23:17:08 +0000</pubDate>
+      
+      <guid>https://radicalrafi.github.io/posts/comfy-deep-learning/</guid>
+      <description>A Comfy Guide to Start Deep Learning If you don&amp;rsquo;t know what deep learning is,then go here or here and read carefully .
+ Studying deep learning is a challenging but at the same time super exciting because you get to experiment with a mix of sci-fi &amp;amp; art &amp;amp; science .
+ When I started learning the subject and I&amp;rsquo;m still learning I fell into many pitfalls and as a russian proverb says if you chase two rabbits you will not catch either one that&amp;rsquo;s why many self-taught people end up lost or find more obstacles the lack of organization and the huge ammount of hype you&amp;rsquo;ll end up spending more time filtering the noise,this little guide here is supposed to get you started ,up and running (I hope) and help guide you in your learning path .</description>
+    </item>
+    
+    <item>
+      <title>Autoencoders as Classifiers</title>
+      <link>https://radicalrafi.github.io/posts/autoencoders-as-classifiers/</link>
+      <pubDate>Fri, 17 Nov 2017 17:42:01 +0000</pubDate>
+      
+      <guid>https://radicalrafi.github.io/posts/autoencoders-as-classifiers/</guid>
+      <description>Exploring Autoencoders as classifiers and other things T.O.C  Introduction
+ What is an autoencoder ?
+ Building some variants in Keras
+ Pretraining and Classification using Autoencoders on MNIST
+  Introduction Autoencoders are a special case of neural networks,the intuition behind them is actually very beautiful
+The idea behind autoencoders is actually very simple, think of any object a table for example .
+Now to describe a table you can use as much features as you like It has 4 or more legs,it&amp;rsquo;s made of wood ,it&amp;rsquo;s rounded sometimes square,sometimes an ellipse &amp;hellip; now a more compressed description can be : It&amp;rsquo;s a smooth surface standing on 3 or more legs .</description>
+    </item>
+    
+  </channel>
+</rss>

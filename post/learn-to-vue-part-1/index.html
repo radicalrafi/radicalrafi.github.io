@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="description" content="a personal blog">
+<meta name="keywords" content="minimalist,blog,goa,machine learning,deep learning,developer">
+
+<base href="https://radicalrafi.github.io">
+
+<title>rafi&#39;s den</title>
+
+<meta name="generator" content="Hugo 0.34" />
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400|Roboto+Slab:400,700|Roboto:300,300i,400,400i,500,500i,700,700i">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://radicalrafi.github.io/css/main.css">
+
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+</head>
+<body lang="en-US">
+<div class="container">
+
+
+<header class="row text-left title">
+  <h1 class="title">Learn To VueJS Part I</h1>
+</header>
+<section id="category-pane" class="row meta">
+  
+  <div class="col-md-12">
+    <h6 class="text-left meta">
+        PUBLISHED ON JAN 25, 2018 
+      
+    </h6>
+  </div>
+  
+</section>
+<section id="content-pane" class="row">
+  <div class="col-md-12 text-justify content">
+    
+
+<h1 id="learn-to-vue-part-1">Learn To Vue Part 1</h1>
+
+<p><strong>Javascript Frameworks</strong> are to a web developer what <a href="https://gizmodo.com/why-mathematicians-are-hoarding-this-special-type-of-ja-1711008881"><strong>Chalk Brands</strong></a> Unlike Chalk Javascript frameworks come and go at the rate of fruit flies, and picking one to invest your time one is a hard task , because it may be obsolete or just never used by paying parties .
+This why ReactJS is so succesful having a strong corporate baker <strong>Facebook</strong> means the software will be updated and supported for a long time ,betting on such framework is the most comfortable choice (remember us humans like comfort zones) but if you notice a pattern among corporate baked framework or tools is that they also force some ideologies or <em>way of doing things</em> like TensorFlow for example , it has a steep learning curve since it enforces an engineering pattern instead of an intuitive one , then there&rsquo;s <strong>Keras</strong> &amp; <strong>PyTorch</strong> :heart: that have an intuitive way of doing things because they are engineered as open-source projects for communities unlike TensorFlow that was engineered for <strong>Google</strong> engineers , this doesn&rsquo;t mean you should hate one and cheerish the other I like TensorFlow for it&rsquo;s good tooling (Serving,TensorBoard&hellip;) but when doing research and iterating on many different architectures and ideas I either use Keras for fast prototyping or PyTorch .</p>
+
+<p><strong>Evan You</strong> built VueJS to prototype web applications and it&rsquo;s intuitive design pushed it&rsquo;s explosive growth and you&rsquo;ll see why after learning it .</p>
+
+<h2 id="the-spa-way-of-doings-things">The SPA way of doings things</h2>
+
+<p>Let me explain some key concepts that will enlighten the new way of doings things not necessary the best way but the more progressive way .</p>
+
+<p>In the past couple years if you were to build a Web app using the JS stack (Node Mongo Express ) you had to choices you could use Angular (which I never learned or used) or use templates and server side rendering , in other words when the user requests a webpage say browses to www.mywebsite.io/ the express backend will send an HTML page rendered using a context and a template built using (Jade,HandleBars,eJS&hellip;) and everything was done this way <strong>server side</strong> .</p>
+
+<p>The new way of doing things is slightly different , instead of sending a different HTML page for each route (&lsquo;/home&rsquo;,&lsquo;/login&rsquo;,&lsquo;/signup&rsquo;&hellip;) the server sends <strong>JSON</strong> data (most of the time you could use XML but then you would already be in Hell ) .</p>
+
+<h5 id="example">Example</h5>
+
+<p><strong>Old Way</strong> :</p>
+
+<pre><code class="language-javascript">router.get('/home',function(req,res){
+    res.render('home',{ user : 'Panda Boys' })
+}
+</code></pre>
+
+<p>The render function will generate an HTML using a template called home.ejs for example and will replace {{ user }} in that template with &lsquo;Panda Boys&rsquo;</p>
+
+<p><strong>New Way</strong> :</p>
+
+<pre><code class="language-javascript">router.get('/home',function(req,res){
+    res.json({
+        user:'New Panda Boys'
+})
+</code></pre>
+
+<p>The Server sends JSON to the client and the client side built using VueJS or React will consume the data and render it in the page .</p>
+
+<p>In a other words instead of rendering on the server and sending HTML you render on the client and send data in JSON format or XML for the masochists (I don&rsquo;t judge :innocent: ).</p>
+
+<h5 id="references-about-the-subject-that-will-clear-things-up">References about the subject that will clear things up :</h5>
+
+<ul>
+<li><p><a href="https://medium.com/@peterxjang/modern-javascript-explained-for-dinosaurs-f695e9747b70">Modern Javascript for Dinosaurs</a></p></li>
+
+<li><p><a href="https://medium.freecodecamp.org/a-study-plan-to-cure-javascript-fatigue-8ad3a54f2eb1">Study Plan To cure Javascript Fatigue</a></p></li>
+</ul>
+
+<h4 id="comparison-of-javascript-frameworks">Comparison of Javascript frameworks</h4>
+
+<ul>
+<li><p><a href="https://vuejs.org/v2/guide/comparison.html">https://vuejs.org/v2/guide/comparison.html</a></p></li>
+
+<li><p><a href="https://hackernoon.com/debate-vuejs-vs-reactjs-9d2a8867b69b">https://hackernoon.com/debate-vuejs-vs-reactjs-9d2a8867b69b</a></p></li>
+</ul>
+
+<p><strong>P.S</strong> : It pays to learn both ReactJS and VueJS it exposes you to more job offers , functional vs intuitive ? programming , don&rsquo;t focus on one thing ,have an open-mind</p>
+
+<h2 id="the-opening">The Opening</h2>
+
+<p><a href="https://vuejs.org">VueJS</a> made an amazing jump from v1 to v2 as you can see here <a href="https://vuejs.org/2016/04/27/announcing-2.0/">Announcing VueJS 2.0</a> , in the following posts we will use VueJS 2 as it&rsquo;s the standard .</p>
+
+<p>VueJS is different from ReactJS in two ways that I see are the separators :</p>
+
+<ul>
+<li>VueJS has a leaner building flow and easier to learn (No JSX isn&rsquo;t hard) what I mean is that VueJS uses a separative way to do things
+&gt; a snippet of code is worth a chapter of words</li>
+</ul>
+
+<p>A VueJS component is built like this :boom: :</p>
+
+<p><strong>Hello-component.vue</strong></p>
+
+<pre><code class="language-javascript">&lt;template&gt;
+    &lt;div class=&quot;hello-message&quot;&gt;
+        Hi {{ user }}
+    &lt;/div&gt;
+&lt;/template&gt;
+&lt;style scoped&gt;
+.hello-message{
+    font-size:30px;
+    color:red;
+}
+&lt;/style&gt;
+&lt;script&gt;
+export default {
+    name:'hello-component',
+    data(){
+        return{
+            user : ' Poo The Panda';
+        }
+    }
+}
+&lt;/script&gt;
+</code></pre>
+
+<p>Inside your template you have your component HTML wrapped around <strong>one dive</strong> :exclamation: then you have your components styles (scoped if you want to have the CSS scoped to only your component) and then your script tag that contains your component logic .</p>
+
+<p>Which makes the end app a composing of multiple components .</p>
+
+<ul>
+<li>The Second Points is the time needed from 0 to Example : All you need is to to drop this line
+<code>html
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue&quot;&gt;&lt;/script&gt;
+</code>
+And you can start building your app using the full power of the Vue gods ,but instead of building components like what I showed you up there .
+You use a slighlty different flow the equivalent of the vue component becomes something like this :</li>
+</ul>
+
+<pre><code class="language-javascript">
+Vue.component('hello-component',{
+    template:`&lt;div class=&quot;hello-message&quot;&gt;
+                Hi {{ user }} 
+                &lt;/div&gt;
+               ',
+})
+
+let app = new Vue({
+    el:'#app',
+    data:{
+        user : 'Poo The Vicious Panda'
+        }
+})
+
+</code></pre>
+
+<p>With your HTML having a</p>
+
+<pre><code class="language-html">&lt;div id=&quot;app&quot;&gt;&lt;hello-component&gt;&lt;/hello-component&gt;&lt;/app&gt; 
+</code></pre>
+
+<p>I hope this introduction was enough to show you the Vue way , in the second part I will start by showing you how to build many things and use many Vue nifties .</p>
+
+  </div>
+</section>
+<section id="tag-pane" class="row meta">
+  
+  <div class="col-md-12">
+    <h6 class="text-right meta">
+      
+    </h6>
+  </div>
+  
+</section>
+
+
+
+
+
+
+
+
+<section id="menu-pane" class="row menu text-center">
+  
+  
+  <span><a class="menu-item" href="https://radicalrafi.github.io/post/python-flask/">&lt; prev | </a></span>
+  
+  
+  <span><a class="menu-item" href="/post">post</a></span>
+  
+  
+  
+  <h4 class="text-center"><a class="menu-item" href="https://radicalrafi.github.io">home</a></h4>
+</section>
+
+
+
+<footer class="row text-center footer">
+  <hr />
+  
+  <h6 class="text-center copyright">© 2017. A.B. <a href="http://creativecommons.org/licenses/by/3.0/">Some Rights Reserved</a>.</h6>
+  
+  <h6 class="text-center powered">Powered by <a href="https://gohugo.io/">Hugo</a> &amp; <a href="https://github.com/shenoybr/hugo-goa">Goa</a>.</h6>
+  
+  
+</footer>
+
+</div>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+
+<script type="text/javascript">
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'XYZ', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
+
+

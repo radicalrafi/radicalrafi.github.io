@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Autoencoders as Classifiers</title>
+        
+        <style>
+
+    html body {
+        font-family: 'Sarabun', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: darkblue;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://radicalrafi.github.io/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sarabun">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/sh.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.53" />
+        
+
+        
+    </head>
+
+    
+    
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+
+   <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+        
+
+       <body>
+         
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Autoencoders as Classifiers</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/posts/">Posts</a></li>
+                            
+                                <li><a href="/projects/">Projects</a></li>
+                            
+                                <li><a href="/writings/">Writings</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:radicalrafi@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/radicalrafi/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/radicalrafi/"><i class="fa fa-twitter"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://www.linkedin.com/in/username/"><i class="fa fa-linkedin"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://stackoverflow.com/users/10203194/halius"><i class="fa fa-stack-overflow"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+      
+
+    <h4><a href="/posts/autoencoders-as-classifiers/">Autoencoders as Classifiers</a></h4>
+    <h5>train an autoencoder to do classification of MNIST digits</h5>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<h1 id="exploring-autoencoders-as-classifiers-and-other-things">Exploring Autoencoders as classifiers and other things</h1>
+
+<h2 id="t-o-c">T.O.C</h2>
+
+<ul>
+<li><p>Introduction</p></li>
+
+<li><p>What is an autoencoder ?</p></li>
+
+<li><p>Building some variants in Keras</p></li>
+
+<li><p>Pretraining and Classification using Autoencoders on MNIST</p></li>
+</ul>
+
+<h3 id="introduction">Introduction</h3>
+
+<p>Autoencoders are a special case of neural networks,the intuition behind them is actually very beautiful</p>
+
+<p><img src="https://screenshots.firefoxusercontent.com/images/f2bde64b-69c2-477e-8654-61cfa9535a2f.png" alt="excerpt of Salakhutdinov &amp; Hinton Paper" />
+The idea behind autoencoders is actually very simple, think of any object a table for example .</p>
+
+<p>Now to describe a table you can use as much <em>features as you like</em> It has 4 or more legs,it&rsquo;s made of wood ,it&rsquo;s rounded sometimes square,sometimes an ellipse &hellip; now a more <em>compressed</em> description can be : It&rsquo;s a smooth surface standing on 3 or more legs .</p>
+
+<blockquote>
+<p>The idea is that can we learn a lower dimenisional,simpler representation of our data  ?</p>
+</blockquote>
+
+<p>Training autoencoders is an inference &ndash;&gt; generative process , first we learn smaller and smaller representations then we start reconstructing them so as the output is similar to the input .</p>
+
+<h3 id="what-is-an-autoencoder">What is an autoencoder</h3>
+
+<p><em>from the Deep Learning Book</em></p>
+
+<blockquote>
+<p>An autoencoder is a neural network that is trained to attempt to copy its input to its output. Internally,
+ it has a hidden layer h that describes a code used to represent the input. The network may be viewed as consi sting of two parts: an encoder function
+ h=f(x) and a decoder that produces a reconstruction r=g(h) .</p>
+</blockquote>
+
+<p>Autoencoders are constrained so not to learn to <em>only copy</em> but rather to construct &amp; deconstruct the input .
+because it&rsquo;s constrained by this reduction it is forced to make priorities on which features of the input
+to learn ? which are useful ? and which are the most important .</p>
+
+<p>This restriction that we impose is in the form of tighter and smaller layers,it&rsquo;s gradually forced to learn less and less in the <strong>encoding</strong> phase and more and more in the <strong>decoding</strong> phase .</p>
+
+<p><img src="https://team.mail.ru/wp-content/uploads/2017/05/Neural-Networks4.png" alt="stacked" /></p>
+
+<ul>
+<li>for a more in depth treatment ,I suggest <a href="http://www.deeplearningbook.org/contents/autoencoders.html">Chapter 14 - Deep Learning Book</a></li>
+</ul>
+
+<h3 id="implementation-training">Implementation &amp; Training</h3>
+
+<ul>
+<li>the following implementations can be seen in full <a href="https://github.com/radicalrafi/deep-learning-notes">here</a></li>
+</ul>
+
+<p>Let&rsquo;s implement a simple autoencoder in keras ,training it on MNIST .</p>
+
+<pre><code class="language-python">input_img = Input(shape=(784,))
+encoded = Dense(128, activation='relu')(input_img)
+encoded = Dense(64, activation='relu')(encoded)
+encoded = Dense(32, activation='relu')(encoded)
+encoded = Dense(16, activation='relu')(encoded) #the latent layer 
+decoded = Dense(64, activation='relu')(encoded)
+decoded = Dense(128, activation='relu')(decoded)
+decoded = Dense(784, activation='sigmoid')(decoded)
+
+autoencoder = Model(input_img, decoded)
+autoencoder.compile(optimizer='adadelta', loss='binary_crossentropy')
+
+autoencoder.fit(x_train, x_train,
+                epochs=100,
+                batch_size=256,
+                shuffle=True,
+                validation_data=(x_test, x_test))
+
+</code></pre>
+
+<p>Running the code up will train the network (you can always summarize it using .summary() method in keras)</p>
+
+<p><img src="https://screenshots.firefoxusercontent.com/images/d7bd8d7d-d09b-4097-9bcb-defb31bcb88a.png" alt="mnist-before-after" /></p>
+
+<p>The upper row pictures shows MNIST the under ones are the reconstructed pictures by the autoencoder you can see clearly how good it can reconstruct data like images .</p>
+
+<p>There are more ways to use Autoencoders you can use Variational Autoencoder (Probobalistic),Denoising Autoencoders (Training the network to remove or filter noise (for example gaussian noise on pictures&hellip;) but one I want to show you is using them as feature learners and classifiers .</p>
+
+<p>In essence any neural network can be turned to a classifier by adding a Sigmoid or Softmax output layer for Binary or Multi Class problems ,when training the network we train it in a normal manner then we remove the decoder part and simply replace it with a softmax layer .</p>
+
+<p><img src="http://ufldl.stanford.edu/wiki/images/thumb/0/0e/Stacked_SparseAE_Features1.png/400px-Stacked_SparseAE_Features1.png" alt="train-ae" /></p>
+
+<p><img src="http://ufldl.stanford.edu/wiki/images/thumb/b/bf/Stacked_SparseAE_Features2.png/400px-Stacked_SparseAE_Features2.png" alt="supervise-ae" /></p>
+
+<blockquote>
+<p>Make sure to freeze your layers as not to mess with them</p>
+</blockquote>
+
+<p>Once this change is into effect we train the network for a second time but we keep all the encoder weights frozen so as to only tune the output layer .</p>
+
+<p>This way we can form a classifier that only uses a small set of features you can take it further by actually using it as a feature extractor network for example .</p>
+
+<pre><code class="language-python">output = Dense(10,activation='softmax')(encoded)
+autoencoder = Model(input_img,output)
+autoencoder.compile(optimizer='adadelta',loss='categorical_crossentropy',metrics=['accuracy'])
+autoencoder.fit(x_train,y_train,epochs=5,batch_size=32)
+score = autoencoder.evaluate(x_test, y_test, verbose=0)
+print('Test loss:', score[0])
+print('Test accuracy:', score[1])
+</code></pre>
+
+<p><img src="https://screenshots.firefoxusercontent.com/images/8f8e488a-d2f7-46b5-8782-8deabb2b7f04.png" alt="training-result" /></p>
+
+<pre><code class="language-python"># making a prediction
+
+m = x_val[0]
+pred = autoencoder.predict(m.reshape(1,784)
+pred = pred.argmax(axis=-1)
+</code></pre>
+
+<p><img src="https://screenshots.firefoxusercontent.com/images/ca0f690d-57b7-4ad2-a7ba-b953acfaf5f8.png" alt="sample" /></p>
+
+<p>after executing this code we get pred is equal to 7 .</p>
+
+<p>You can test this code in countless way ,try reducing the latent space to a denser layer say 4 nodes or just 2</p>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

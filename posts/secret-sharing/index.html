@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Crypto Journal Part I : Secret Sharing</title>
+        
+        <style>
+
+    html body {
+        font-family: 'Sarabun', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: darkblue;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://radicalrafi.github.io/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sarabun">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/sh.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.53" />
+        
+
+        
+    </head>
+
+    
+    
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+
+   <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+        
+
+       <body>
+         
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Crypto Journal Part I : Secret Sharing</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/posts/">Posts</a></li>
+                            
+                                <li><a href="/projects/">Projects</a></li>
+                            
+                                <li><a href="/writings/">Writings</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:radicalrafi@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/radicalrafi/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/radicalrafi/"><i class="fa fa-twitter"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://www.linkedin.com/in/username/"><i class="fa fa-linkedin"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://stackoverflow.com/users/10203194/halius"><i class="fa fa-stack-overflow"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+      
+
+    <h4><a href="/posts/secret-sharing/">Crypto Journal Part I : Secret Sharing</a></h4>
+    <h5>how to decentralize the non-evident - why more means less</h5>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<p>I wrote this blogpost on an 18 hour trip :) that I take once or twice a year to go home .
+I&rsquo;ve been lately spending more time studying the mathematical foundations of cryptography,
+and a blog was deemed necessary to move from the theoretical to the intuitive.</p>
+
+<p>Cryptography started as a casual reading and puzzles,then it became a <a href="https://cryptopals.org">target</a>
+and now a passion .</p>
+
+<p>In a series of blogpost I&rsquo;ll try to explain in an intuitive way what I find the most
+interesting parts in cryptography I have no idea how long the series will span but let&rsquo;s just say that it
+would be at least 3 blogposts long .</p>
+
+<h2 id="secret-sharing">Secret Sharing</h2>
+
+<p>Secret Sharing is exactly how it sounds like , how do you share a secret among a group without any participant knowing the secret as a whole .
+It was invented by Adi Shamir (The S in RSA) and George Blakley independently in 1979 invented mean the creation of a viable scheme for the process.
+Both schemes <a href="http://cs.jhu.edu/~sdoshi/crypto/papers/shamirturing.pdf">Shamir Secret Sharing</a> and Blakley&rsquo;s are based on mathematical intuition .
+We will do the same start from the intuitive explanation moving to explaining both schemes .</p>
+
+<p>Secret Sharing enables you (for ex) to split your Ethereum private key between n persons and set a threshold t of necessary parts to reconstruct it back .
+And from this principle we can think of multiple applications in the field of MPC or even Blockchains .</p>
+
+<h4 id="intuition">Intuition</h4>
+
+<ul>
+<li><p>How many straight lines pass trough one point ? :</p>
+
+<ul>
+<li>an infinity</li>
+</ul></li>
+
+<li><p>How many straight lines pass trough more than one point ? 2 points or 3 ?:</p>
+
+<ul>
+<li>one a unique point</li>
+</ul>
+
+<p><img src="https://screenshotscdn.firefoxusercontent.com/images/333ef232-597e-49cf-bb2b-a3c0442c95e1.png" alt="line" /></p></li>
+</ul>
+
+<p>Emm do you see it ? Suppose your secret is 5 the straight line above has a parametric equation y = x+5
+And to evaluate your secret you need to compute f(0) = 5 .</p>
+
+<p>So if a person knows one point for example f(4) = 9 he can&rsquo;t compute f(0) it can be anything .
+Now we can share the secret which is 5 into two parts  :</p>
+
+<ul>
+<li>f(4) = 9</li>
+<li>f(7) = 12</li>
+</ul>
+
+<p>And give each one to a different person .</p>
+
+<p>What we did here is pick a straight line such as f(0) is equal to our secret we pick two random numbers from the line
+and give them to two other parties .
+Now you may ask me but how do I reconstruct the secret from those two ?
+And I&rsquo;ll tell you to plot the points on a graph :) or find the slope because the secret is actually the y-intercept .</p>
+
+<p>Now that we have an intuition let&rsquo;s make things harder for our adversary,let&rsquo;s make it more complex .
+What if instead of choosing a straight line you want to use something more difficult , more <em>curved</em> ? :</p>
+
+<p><img src="https://screenshotscdn.firefoxusercontent.com/images/2230caed-3138-4e02-b807-5905a1fec093.png" alt="polynome" /></p>
+
+<p>The graph above is of a quadratic function and f(x) = 5</p>
+
+<p><img src="https://screenshotscdn.firefoxusercontent.com/images/5c4bc402-251d-4747-9f72-8d7632a1c00c.png" alt="deeper" /></p>
+
+<p>The equation of the above function is :</p>
+
+<ul>
+<li><strong>f(x)=x^2+3x+5</strong></li>
+</ul>
+
+<p>A Quadratic function is also refeered to as a second degree polynomial , and to find the secret you need at least 3 points (since 3 points determine one quadratic line).</p>
+
+<p>Remember our secret is f(0) let&rsquo;s split it among 3 participants we can do even four or more but the least number of shares required ,
+is always the degree of our polynomial + 1 . Why ? Well because to reconstruct it we will use <a href="https://www.wikiwand.com/en/Polynomial_interpolation#/Uniqueness_of_the_interpolating_polynomial">polynomial interpolation</a>
+and it&rsquo;s proven that you always need n+1 point to interpolate a polynomial of degree n at most .</p>
+
+<p>Now a polynomial is defined as such :</p>
+
+<ul>
+<li><p>P(X) = a0 + a1 * X + a2 * X^2 + &hellip; + an * X^n</p>
+
+<ul>
+<li>n is the degree of the polynomial</li>
+<li>a0 is the secret</li>
+</ul></li>
+</ul>
+
+<p>And for each order or degree k you need k+1 shares at least to retrieve the secret using polynomial interpolation (Lagrange or Hermite depending on the efficiency and complexity of the problem).</p>
+
+<p>I won&rsquo;t delve into the computational stuff such as the error or the noise or efficiency of which interpolation to use .</p>
+
+<h4 id="shamir-secret-sharing">Shamir Secret Sharing</h4>
+
+<p>The scheme we described above was invented by Adi Shamir let&rsquo;s describe it in a series of steps :</p>
+
+<ul>
+<li><p>A Dealer secretly picks coefficients Aj such as Aj belongs to the set of integers modulo p where p is a prime .</p></li>
+
+<li><p>Let S our secret the the final polynomial is :</p>
+
+<p><img src="https://screenshotscdn.firefoxusercontent.com/images/61ef2314-bbfd-479b-860c-a2370aed7412.png" alt="altp" /></p></li>
+
+<li><p>A Share Yi = a(Xi)</p></li>
+</ul>
+
+<p>Shamir scheme is both ideal and efficient and also extendable :</p>
+
+<ul>
+<li>Ideal : The size of share is the size of the secret a no information is given besides this .</li>
+<li>Secure : Knowing any of the k-1 shares doesn&rsquo;t give information about the secret .</li>
+<li>Extendable : You can add more people by computing more values</li>
+</ul>
+
+<h4 id="blakley-scheme">Blakley Scheme</h4>
+
+<p>Blakley intuition was beyond the idea of lines but of planes and hyperplanes .
+A Hyperplane is the vector space K-1 for example :</p>
+
+<p>The hyperplane of the 3D Space is the plane (2D) , the hyperplane of the 2D space is the straight line (1D) .</p>
+
+<ul>
+<li>The secret is located on the intersection of hyperplanes</li>
+</ul>
+
+<p><img src="https://screenshotscdn.firefoxusercontent.com/images/48467986-2ba9-4d9f-a379-f188ced5fb1c.png" alt="sec" /></p>
+
+<p>I won&rsquo;t go into much detail here because the scheme is rarely used it&rsquo;s not space efficient (apparently) .</p>
+
+<p>I hope this small intro made you think intuitively about the problem and maybe invent your own scheme :)</p>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

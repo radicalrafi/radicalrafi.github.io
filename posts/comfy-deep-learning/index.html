@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Comfy Deep Learning</title>
+        
+        <style>
+
+    html body {
+        font-family: 'Sarabun', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: darkblue;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://radicalrafi.github.io/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sarabun">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/sh.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.53" />
+        
+
+        
+    </head>
+
+    
+    
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+
+   <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+        
+
+       <body>
+         
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Comfy Deep Learning</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/posts/">Posts</a></li>
+                            
+                                <li><a href="/projects/">Projects</a></li>
+                            
+                                <li><a href="/writings/">Writings</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:radicalrafi@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/radicalrafi/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/radicalrafi/"><i class="fa fa-twitter"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://www.linkedin.com/in/username/"><i class="fa fa-linkedin"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://stackoverflow.com/users/10203194/halius"><i class="fa fa-stack-overflow"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+      
+
+    <h4><a href="/posts/comfy-deep-learning/">Comfy Deep Learning</a></h4>
+    <h5>ressources to master the art of primitive brain creation</h5>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<h1 id="a-comfy-guide-to-start-deep-learning">A Comfy Guide to Start Deep Learning</h1>
+
+<p>If you don&rsquo;t know what deep learning is,then go <a href="http://neuralnetworksanddeeplearning.com/">here</a> or <a href="http://arxiv.org/pdf/1404.7828v4.pdf">here</a> and read carefully .</p>
+
+<blockquote>
+<p>Studying deep learning is a challenging but at the same time super exciting because you get to experiment with a mix of sci-fi &amp; art &amp; science .</p>
+</blockquote>
+
+<p>When I started learning the subject and I&rsquo;m still learning I fell into many pitfalls and as a russian proverb says <em>if you chase two rabbits you will not catch either one</em> that&rsquo;s why many self-taught people end up lost or find more obstacles the lack of organization and the huge ammount of hype you&rsquo;ll end up spending more time filtering the noise,this little guide here is supposed to get you started ,up and running (I hope) and help guide you in your learning <strong>path</strong> .
+I wrote this for myself personally you may not like this guide and I don&rsquo;t blame you ,but I personally prefer books and papers + videos I spend a lot of time
+focusing on the basics and understanding everything at a deep level before moving to the next thing .</p>
+
+<blockquote>
+<blockquote>
+<p>Trends come and go but my foundations still eternal - Tupac</p>
+</blockquote>
+</blockquote>
+
+<p>The time intervals is given as an approximation I&rsquo;m in college so I usually get not much time during the week,this is like night classes or weekend classes .</p>
+
+<p>I also assumed you&rsquo;re comfortable with undergrad mathematics Linear Algebra,Calculus Statistics and Probabilites I put some ressources at the end to help with this as well .</p>
+
+<p>Note that this guide isn&rsquo;t a school curriculum but more like an organized step by step guide .
+<strong>I&rsquo;m not an expert</strong></p>
+
+<h3 id="the-challengers-one-shot-learning">The Challengers: one shot learning:</h3>
+
+<ul>
+<li><p><a href="https://fast.ai">fast.ai</a> : This course is complete end-to-end I loved it and following it should get you started writing models and doing kaggle submissions
+on day 1 it&rsquo;s perfect for people who prefer visual learning more than just reading .</p></li>
+
+<li><p>I wouldn&rsquo;t recommend Deep Learning by Google on Udacity some will like it others won&rsquo;t I&rsquo;m part of the others and I didn&rsquo;t take The <a href="https://deeplearning.ai">deeplearning.ai</a> course by Andrew Ng so I can&rsquo;t say nothing about it .</p></li>
+
+<li><p><a href="http://www.deeplearningbook.org">Deep Learning Book</a> Keep a tab open for this one it&rsquo;s the most important book on deep learning ,if deep learning is a religion this is the holy book .</p></li>
+
+<li><p><a href="http://deeplearning.net/tutorial/">Deep Learning Tutorial</a> I loved it and read it twice it has the best mixture of theory and practice altough using Theano , you won&rsquo;t have an issue using PyTorch or Tensorflow but the theoretical parts are really worth reading .</p></li>
+</ul>
+
+<hr />
+
+<h3 id="week-1-week-2">Week 1 -&gt; Week 2:</h3>
+
+<ul>
+<li><p>Take the first week to learn how to manipulate data plain and simple data science take this first week to go trough this book one of the most common pitfalls
+is not to understand data manipulation if you can&rsquo;t clean and organize your data visualize it and make hypothesis you&rsquo;ll have a hard time . :</p></li>
+
+<li><h2 id="python-data-science-handbook-https-jakevdp-github-io-pythondatasciencehandbook"><a href="https://jakevdp.github.io/PythonDataScienceHandbook/">Python Data Science Handbook</a></h2></li>
+</ul>
+
+<h3 id="week-2-week-4">Week 2 -&gt; Week 4:</h3>
+
+<p>I think getting started is the easy part especially if you just want to understand how things work for starters I recommend the following :</p>
+
+<ul>
+<li><p><a href="http://neuralnetworksanddeeplearning.com/">Michael Nielsen Neural Networks and Programming</a> :</p>
+
+<p>This is a gem period this is the best piece of literatture one should read to get started it&rsquo;s clear,concise,practical (Python code) and explains the important
+concepts like backpropagation,regularization,hyperparameters and explains in detail why Neural network actually even work .
+Take your time to read it carefully and read it slowly and understand every part of it because trust me it will help you on the long run more than you can imagine</p></li>
+
+<li><p><a href="http://cs231n.github.io/">CS231n</a> :
+a Stanford course by the mighty Karpathy I suggest module 0 and 1 to get started learn to use numpy and matplotlib
+writing neural networks without libraries is a great exercice to understand things at a deeper level</p></li>
+</ul>
+
+<hr />
+
+<p>By here you should be exited to dive deeper and it&rsquo;s here where I stop you don&rsquo;t google LSTM or RNN or CNNs and try to squash them because it&rsquo;s gonna give you some issues later  by here you should started getting your hands dirty with code,lots of code :) .</p>
+
+<ul>
+<li><p>Download 3 different datasets from Kaggle anything you like (Housing + Titanic + MNIST) is a good starting choice because you get Image,Regression,Classification but anything else should be good .</p></li>
+
+<li><p>Once you have the data use what you learned from the previous weeks to build models and evaluate them I suggest two ways :</p>
+
+<ul>
+<li><p>If you&rsquo;re like me you&rsquo;ll write everything from scratch it&rsquo;s long,complex,and will be buggy but trust me manipulating matrices using numpy is very very useful on the long term bonus points if you use <a href="https://pytorch.org">PyTorch</a> this <a href="https://github.com/yunjey/pytorch-tutorial">repo</a> should get you started .</p></li>
+
+<li><p>Otherwise then install keras and start using it :</p>
+
+<ul>
+<li><a href="https://keras.io/">https://keras.io/</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+<hr />
+
+<h4 id="misc">Misc:</h4>
+
+<p>This are the extras read these when you&rsquo;re sipping you&rsquo;re morning coffee or taking a pause or whatever  :) :</p>
+
+<ul>
+<li><a href="http://colah.github.io/posts/2015-08-Backprop/">Chris Olah Backpropagation tutorial</a> .</li>
+<li><a href="https://iamtrask.github.io">Trask&rsquo;s blog</a> Read all of it from the first to the last post and send him a thank you message .</li>
+<li><a href="http://www.deeplearningbook.org/contents/guidelines.html">General Guidelines</a> A Chapter from <strong>THE</strong> deep learning book .</li>
+<li><a href="http://ruder.io/optimizing-gradient-descent/">Optimization Methods and Gradient Descent</a> This should clarify anything about gradient descent .</li>
+</ul>
+
+<hr />
+
+<h3 id="week-4-week-x">Week 4 -&gt; Week X :</h3>
+
+<p>Most will suggest to start with an architecture and go from there you can pick LSTM,RNN,CNN &hellip; but trust me if you got the basics right you&rsquo;ll have no problem picking a <em>specialty</em> so from this point you can take the following in any order you would like and I mean any order the rest is mainly practice :</p>
+
+<p>Now you&rsquo;ll probably have enough understanding to get into some formal literature</p>
+
+<p>I suggest the following papers  to get started and this <a href="https://github.com/songrotek/Deep-Learning-Papers-Reading-Roadmap">Roadmap</a> should help you organize what you read next :</p>
+
+<ul>
+<li><p><a href="http://www.cs.toronto.edu/%7Ehinton/absps/NatureDeepReview.pdf">Lecun,Bengio,Hinton Survey</a></p></li>
+
+<li><p><a href="http://www.cs.toronto.edu/%7Ehinton/absps/ncfast.pdf">Hinton et al</a> An Algorithm for fast Deep Belief training <em>a corner stone</em> .</p></li>
+
+<li><p><a href="http://www.cs.toronto.edu/%7Ehinton/science.pdf">Hinton,Salakhutdinov Dimensionality Reduction using NN</a></p></li>
+</ul>
+
+<hr />
+
+<h4 id="cnn">CNN :</h4>
+
+<ul>
+<li><p>Finish CS231n it&rsquo;s the best Convolutional Network course I&rsquo;ve ever read and it&rsquo;s full of other ressources</p></li>
+
+<li><p><a href="http://colah.github.io/posts/2014-07-Conv-Nets-Modular/">Chris Olah CNN&rsquo;s</a></p></li>
+
+<li><p><a href="http://colah.github.io/posts/2014-07-Understanding-Convolutions/">Understanding Convolutions</a></p></li>
+
+<li><p><a href="http://www.wildml.com/2015/11/understanding-convolutional-neural-networks-for-nlp/">CNN can be used for NLP</a></p></li>
+
+<li><p><a href="https://www.youtube.com/watch?v=ue4RJdI8yRA&amp;list=PLlJy-eBtNFt6EuMxFYRiNRS07MCWN5UIA&amp;index=11">ConvNets in practice</a></p></li>
+
+<li><p><a href="http://jeffreydf.github.io/diabetic-retinopathy-detection/">Kaggle Diabetic Retinopathy winner&rsquo;s writeup</a></p></li>
+
+<li><p><a href="https://leonardoaraujosantos.gitbooks.io/artificial-inteligence/content/object_localization_and_detection.html">Object Detection Using Neural Networks</a></p></li>
+</ul>
+
+<hr />
+
+<h4 id="rnn-gru-lstm">RNN GRU LSTM</h4>
+
+<ul>
+<li><p><a href="http://karpathy.github.io/2015/05/21/rnn-effectiveness/">Karpathy&rsquo;s blog post</a> You&rsquo;re gonna love this architecture .</p></li>
+
+<li><p><a href="https://www.tensorflow.org/tutorials/recurrent/">Tensorflow&rsquo;s Tutorial</a></p></li>
+
+<li><p><a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/">Understanding LSTM&rsquo;s by C.Olah</a></p></li>
+
+<li><p><a href="http://deeplearning.net/tutorial/lstm.html">LSTM For Sent analysis</a></p></li>
+
+<li><p><a href="https://deeplearning4j.org/lstm.html">Introduction to Memory Based Networks</a></p></li>
+
+<li><p><a href="http://www.wildml.com/2015/09/recurrent-neural-networks-tutorial-part-1-introduction-to-rnns/">WildML Intro to RNN</a></p></li>
+</ul>
+
+<h3 id="autoencoders">Autoencoders</h3>
+
+<ul>
+<li><p><a href="https://blog.keras.io/building-autoencoders-in-keras.html">Autoencoders in Keras</a></p></li>
+
+<li><p><a href="http://deeplearning.net/tutorial/dA.html#daa">A Description of Autencoders</a></p></li>
+</ul>
+
+<h3 id="nature-language-processing">Nature Language Processing</h3>
+
+<ul>
+<li><a href="http://cs224d.stanford.edu/syllabus.html">CS224d</a> This is the equivalent of CS231n but for NLP .</li>
+</ul>
+
+<h3 id="books">Books</h3>
+
+<ul>
+<li><p><a href="https://www.manning.com/books/grokking-deep-learning">Grokking Deep Learning by Andrew Trask</a> Bookshelf worthy amazing book</p></li>
+
+<li><p><a href="http://shop.oreilly.com/product/0636920052289.do">Hands On Machine Learning &hellip; by Aurélien Gérond</a></p></li>
+
+<li><p><a href="http://shop.oreilly.com/product/0636920039709.do">Fundamentals of Deep Learning by N.Buduma</a></p></li>
+</ul>
+
+<h3 id="misc-ressources">Misc Ressources :</h3>
+
+<ul>
+<li><p>Oxford Course uses TORCH (Lua Version) but the slides are amazing <a href="https://www.cs.ox.ac.uk/people/nando.defreitas/machinelearning/">here</a></p></li>
+
+<li><p>If you ever want to see a tensorflow implementation this <a href="https://github.com/carpedm20?tab=repositories">repo</a> is gold .</p></li>
+
+<li><p><a href="https://github.com/ChristosChristofidis/awesome-deep-learning#datasets">Datasets</a> because how can you learn without getting your hands dirty</p></li>
+
+<li><p>Kaggle of course .</p></li>
+
+<li><p><a href="https://reddit.com/r/machinelearning">r/MachineLearning</a> A Great subreddit with amazing content .</p></li>
+</ul>
+
+<h2 id="general-advice">General Advice</h2>
+
+<ul>
+<li><p>Pick PyTorch for working because it&rsquo;s <strong>dynamic</strong> that means you reiterate faster on your code you&rsquo;re computational graph that constitutes you&rsquo;re neural network doesn&rsquo;t need to be compiled <code>( tf.sess.run() I see you )</code> this will speed the process for you learning and experimenting plus it&rsquo;s less verbose and more hands-on also choose to use Keras , because in my opinion as a self-taught person I spent hours&hellip; days learning tensorflow and I just couldn&rsquo;t understand why go trough so much hell to to write a 3 layer network prefer fast and terse of over-engineered and verbose and complex .</p></li>
+
+<li><p>Practice makes perfect and <strong>the master has failed more than the begineer ever tried</strong> this is the most important thing you should do and learn and live by .</p></li>
+</ul>
+
+<p><strong>Happy Learning and if this ever helped you say thanks on twitter :)</strong></p>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

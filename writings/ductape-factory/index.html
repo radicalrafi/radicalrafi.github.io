@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Reinventing The Ductape and The Creation of Opensource</title>
+        
+        <style>
+
+    html body {
+        font-family: 'Sarabun', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: darkblue;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://radicalrafi.github.io/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sarabun">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/sh.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.53" />
+        
+
+        
+    </head>
+
+    
+    
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+
+   <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+        
+
+       <body>
+         
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Reinventing The Ductape and The Creation of Opensource</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/posts/">Posts</a></li>
+                            
+                                <li><a href="/projects/">Projects</a></li>
+                            
+                                <li><a href="/writings/">Writings</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:radicalrafi@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/radicalrafi/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/radicalrafi/"><i class="fa fa-twitter"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://www.linkedin.com/in/username/"><i class="fa fa-linkedin"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://stackoverflow.com/users/10203194/halius"><i class="fa fa-stack-overflow"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+      
+
+    <h4><a href="/writings/ductape-factory/">Reinventing The Ductape and The Creation of Opensource</a></h4>
+    <h5>ressources to master the art of primitive brain creation</h5>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<h2 id="inventing-a-better-duct-tape-for-a-duct-tape-solvable-situation">Inventing a better duct tape for a duct-tape solvable situation .</h2>
+
+<p>Duct tape is one of those inventions that we really don&rsquo;t think about they seem obvious in <em>hindsight</em> ; oh .
+Like the wheel or the glass or the table , duct tape is an all-things invention that fits in many situations , yet
+we can&rsquo;t really think  of a reinvention of it because it&rsquo;s really at the lowest tier of the inventions pyramid .</p>
+
+<table>
+<thead>
+<tr>
+<th>Highly Abstract Solutions</th>
+<th>Computation in general</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Medium Abstract Solutions</td>
+<td>Either evolved from low a low abstract level , or solved an comes in variants (modern eye glasses,cars,bikes)</td>
+</tr>
+
+<tr>
+<td>Low Abstract Solutions</td>
+<td>Solved by introducing an abstract object a &ldquo;machine&rdquo; (steam engine,thrill mill,eyeglasses,bikes)</td>
+</tr>
+
+<tr>
+<td>Barebones Solutions</td>
+<td>Solved with tools constructed from natural solutions (caveman hammer,caveman tools,fire )</td>
+</tr>
+</tbody>
+</table>
+
+<p>This of course is just my personal view , what I am pointing to here is that there&rsquo;s no wheel in programming what people call
+&ldquo;reiventing the wheel&rdquo; I call &ldquo;a try to efficiently fix x-problems &rdquo; <em>x</em> here can be a library or a piece of code or an app &hellip;
+In Software generally there are a bunch of tools that exist to solve problems (programming languages,utilities,markdown table generators &hellip;)
+And there&rsquo;s always a situation where you want to grab duct tape and stitch bits together , you end up inventing a new tool that serves as duct tape
+to that situation . Like when you browse <a href="https//stackoverflow.com">stackoverflow.com</a> and answer a question your question however niche it is, can
+actually serve someone&rsquo;s else problem . Reinvent that duct tape and publish that code because it&rsquo;s obvious that we are no where near having
+good software (<strong>THE</strong> programming language , <strong>THE</strong> data processing library, <strong>THE</strong> working datetime parser, <strong>THE</strong> data exchange format ) .</p>
+
+<p>It certainly helps to have a bunch of software that aims to solve a problem in a certain way like <a href="https://vuejs.org">Vuejs</a> or <a href="https://reactjs.org">React</a>
+and many others , and this is a <strong>good</strong> thing that we should aim for .</p>
+
+<blockquote>
+<p><strong>STOP Saying STOP Reinventing the wheel</strong></p>
+</blockquote>
+
+<p>Many times I see these kind of comments in <a href="https://stackoverflow.com">stackoverflow.com</a> or <a href="https://reddit.com">reddit.com</a> and co , these
+are just sideline watchers they use whatever works and produce a piece of working software with an indecipherable code , a latent api or maybe
+a viral thing . Then there are those who figure out a new duct tape technique to solve <strong>x</strong> and then endup creating a <strong>GREAT</strong> piece of software like
+<a href="https://vuejs.org">VueJS</a> .</p>
+
+<p><strong>So please keep reinventing duct tape, keep reiterating, keep building .</strong></p>
+
+<h3 id="p-s">P.S :</h3>
+
+<ul>
+<li>Duct tape Idea from <a href="https://rachelbythebay.com/w/2018/03/23/ducttape/">RachelByTheBay</a> .</li>
+<li>I am really not <em>criticizing</em> but just ranting or venting as the west calls it .</li>
+</ul>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

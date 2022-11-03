@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Crypto Journal Part II : Homomorphic Encryption</title>
+        
+        <style>
+
+    html body {
+        font-family: 'Sarabun', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: darkblue;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://radicalrafi.github.io/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sarabun">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/sh.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.53" />
+        
+
+        
+    </head>
+
+    
+    
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+
+   <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+        
+
+       <body>
+         
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Crypto Journal Part II : Homomorphic Encryption</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/posts/">Posts</a></li>
+                            
+                                <li><a href="/projects/">Projects</a></li>
+                            
+                                <li><a href="/writings/">Writings</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:radicalrafi@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/radicalrafi/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/radicalrafi/"><i class="fa fa-twitter"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://www.linkedin.com/in/username/"><i class="fa fa-linkedin"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://stackoverflow.com/users/10203194/halius"><i class="fa fa-stack-overflow"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+      
+
+    <h4><a href="/posts/homomorphic-encryption/">Crypto Journal Part II : Homomorphic Encryption</a></h4>
+    <h5>An introduction to homomorphic encryption</h5>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<h3 id="starting-words">Starting Words</h3>
+
+<p>This post covers homomorphic encryption with an introductory perspective then shows example of two schemes the math is kept
+to a minimum but some terms that are used a lot need to be explained at first , every paper is referenced at the end of the post .
+A Later blogpost will look at other schemes and discuss the idea of bootstraping circuits .</p>
+
+<ul>
+<li>Group : A Group in mathematics is the most basic algebraic structure , it&rsquo;s simply a set (a bunch of numbers) and an operation (addition,multiplication&hellip;) that fits certain criterias or axioms .</li>
+<li>Modulo : Modulo is the operation (%) in programming languages it results in the remainder of the integer division .</li>
+<li>Cyclic Group : A Cyclic Group is a group that can be generated from one element we call the generator imagine the group of powers of 2 {2^k} that&rsquo;s a cyclic group it&rsquo;s generator is 2 .</li>
+<li>Congruence: a = b (mod n) this reads a is congruent to b modulo n and simply means that a-b is a multiple of n .</li>
+<li>Finite Groups : a finite group is a group with a limited set ( a fixed number of elements ).</li>
+<li>Integers Modulo n : this is the most used types of groups in cryptography and this groups contains the number {0,1,2&hellip;, n-1} and all operation are modular .</li>
+<li>Modular arithmetic : we speak about modular operation for example modular addition when we do addtion in an integer modulo group , for example a clock uses modulo 12 addition .</li>
+<li>Modular multiplicative inverse : a modular multiplicative inverse of a number x is another number y such as xy = 1 mod n (the product xy is congruent to 1 modulo n) in simpler terms xy - 1 can be evenly divided by n</li>
+<li>Order of a group : the order of a group is the number of elements in it&rsquo;s set .</li>
+</ul>
+
+<p>We won&rsquo;t need this much math to get an idea and work some examples but having a concept or an idea of what these are will help on the long term, I recommend two books if you want to dive deeper in
+the mathematics .</p>
+
+<h3 id="introduction">Introduction</h3>
+
+<p><a href="https://en.wikipedia.org/wiki/Homomorphic_encryption">Homomorphic Encryption</a> is based on the idea of homomorphisms in
+Group theory put it simply a <strong>homomorphism</strong> is a function that maps one group to another such that :</p>
+
+<blockquote>
+<p>f(a.b) = f(a).f(b)    (1)</p>
+</blockquote>
+
+<p>consider the dot to be an operation (additon or multiplication for ex) .</p>
+
+<p>Homomorphic encryption is thus a structure/operation preserving encryption/mapping it&rsquo;s use cases span across different
+areas for example  electronic voting and machine learning anonymous location queries , search engines , cloud computing&hellip;</p>
+
+<blockquote>
+<p>the word homomorphism is constructed of <em>homos</em> which means same in Greek and <em>morphe</em> which stands for shape .</p>
+</blockquote>
+
+<h2 id="homomorphic-encryption">Homomorphic Encryption</h2>
+
+<p>Encryption is the science or art of transforming plain text messages to an &ldquo;encrypted&rdquo; form <em>hidden</em> , homomorphic encryption
+is a form of encryption in which the formula we stated above is correct in other words the &ldquo;f&rdquo; is an encryption algorithm
+and <strong>the encryption of the product of two numbers is equal to the product of the encryptions of the numbers</strong> :</p>
+
+<blockquote>
+<p>E(a.b) = E(a).E(b)</p>
+</blockquote>
+
+<ul>
+<li><strong>E</strong> is an encryption algorithm or in more proprietary terms a <em>scheme</em> .</li>
+</ul>
+
+<p>Now as any kind of encryption we can describe two ways of doing it either by using <strong>Secret Key Encryption</strong> or <strong>Public Key Encryption</strong>
+the first uses one key to both encrypt and decrypt a message , the second uses a public key to encrypt and a private key to decrypt
+mathematically speaking they are both theoretically secure alas in the real world it&rsquo;s hard to get it right and a scheme such as RSA can be easily broken
+if it&rsquo;s not padded .</p>
+
+<p>RSA is actually the first public-key homomorphic encryption scheme but to achieve semantic security RSA needs to pad a message with random bits before ebcryption
+The padding results in RSA losing it&rsquo;s <em>homomorphic</em> property so if you hear the words &ldquo;RSA and Homomorphic Encryption&rdquo; we are talking about <strong>unpadded RSA</strong> .</p>
+
+<p>An encryption algorithm is called homomorphic if it&rsquo;s fills the property (1) for some kind of operation as we are going to see next some <em>schemes</em> are only
+homomorphic with respect to addtion , some to both addtion and multiplication and the messages are usually numbers .
+There are multiple schemes that separate into two what we call <em>Somewhat Homomorphic</em> and <em>Fully Homomorphic</em> .</p>
+
+<ul>
+<li>Somewhat Homomorphic : You are limited in the kind of operations you can do between to <em>ciphertext</em> , you can add two <em>ciphertexts</em> but you can&rsquo;t multiply them
+or you can multiply a <em>ciphertext</em> with a plaintext .</li>
+
+<li><p>Fully Homomorphic : You can typically evaluate any kind of operations on ciphertexts the term was coined by Rivest in 1978 but Craig Gentry was the first to
+introduce a scheme that works on arbitrary functions in his Phd thesis &ldquo; Fully Homomorphic Encryption using Ideal Lattices&rdquo; .
+<strong>Key Point</strong> : homomorphic encryption and in general is defined by the propert0y (1) , the dot operation can represent any operation as long as the formula holds
+correct for that operation it can be addition,multiplication or modular multiplication .</p></li>
+
+<li><p>N.B : Many Public Key based schemes are &ldquo;probabilistic&rdquo; meaning that if you encrypt the same message multiple times it will yield a different ciphertext thus  they introduce randomness to hide the smallest partial information about the plain text what we call <strong>semantically secure</strong> .</p></li>
+</ul>
+
+<h2 id="examples-of-schemes">Examples Of Schemes</h2>
+
+<p>In this section we introduce a few schemes and we show a few examples using small parameters and Python to describe this process .
+Note that the code is here is merely toy examples don&rsquo;t use it in real life because as you will learn in <a href="https://cryptopals.com">cryptopals</a>
+it&rsquo;s hard to implement crypto .</p>
+
+<h3 id="paillier">Paillier</h3>
+
+<p>The Paillier scheme , was invented by Pascal Paillier in 1999 it&rsquo;s a probabilistic
+scheme that is homomorphic with respect to addition ( the sum of two ciphertext is equal to the ciphertext of the sum of the two plaintext equivalents) and
+to multiplication by a constant .</p>
+
+<p>Suppose E is the paillier encryption function then we have the following two properties :</p>
+
+<ul>
+<li>E(a)+E(b) = E(a+b)</li>
+<li>E(a)^b = E(a * b)</li>
+</ul>
+
+<p>Paillier is composed of three algorithms in fact three algorithms are necessary to create an encryption scheme .</p>
+
+<p>First you need a Key generation algorithm, second an encryption algorithm and last a decryption algorithm let&rsquo;s see how Paillier implement those .</p>
+
+<h5 id="key-generation">Key Generation</h5>
+
+<p>To generate a key you choose two large primes p and q such that :</p>
+
+<ul>
+<li>gcd(pq,(p-1)(q-1)) = 1
+In otherwords the product of p and q and (p-1) and (q-1) are relatively prime ( their greatest common divisor is 1) .</li>
+</ul>
+
+<p>Then you compute two parameters n &amp; lambda such that :
+* n = pq and lambda = lcm(p-1,q-1)
+LCM is the least common multiple for example lcm(4.8) = 16</p>
+
+<ul>
+<li>Select a random integer g such as g belongs to the set of integers modulo n squared .
+in this case (p and q are primes of the same length) you can pick g as n+1</li>
+
+<li><p>Compute mu such as mu = lambda^-1 mod n (modular multiplicative inverse)</p></li>
+
+<li><p>The public key is (n,g) and the private key is (lambda,mu)</p></li>
+</ul>
+
+<h5 id="encryption">Encryption</h5>
+
+<ul>
+<li><p>suppose m is your message and r a random number such as :</p>
+
+<p>m &lt; n and r &lt; n</p></li>
+
+<li><p>c = g^m * r^n mod n^²</p></li>
+</ul>
+
+<p>c is the ciphertext of m</p>
+
+<h5 id="decryption">Decryption</h5>
+
+<ul>
+<li>m = L(c^lambda mod n^²) * mu mod n<br /></li>
+</ul>
+
+<p>L(x) = (x-1) / n</p>
+
+<h5 id="example-with-small-parameters-and-proof-of-homomorphism">Example with small parameters and proof of homomorphism</h5>
+
+<ul>
+<li>let p = 11 and q = 13</li>
+<li>n = pq = 143</li>
+<li>g = n+1 = 144</li>
+</ul>
+
+<p>The public key is (143,144)</p>
+
+<p>Let&rsquo;s encrypt the answer of the universe and send it to the Zorbs ( habitants of Zorbis planet )</p>
+
+<ul>
+<li><p>m = 42</p></li>
+
+<li><p>we pick r : r = 23</p></li>
+
+<li><p>c = g^m * r^n (mod n^2)
+= 144^42 * 23^143 (mod 143^2)
+= 9637</p></li>
+
+<li><p>m = L(c^lambda mod n^2) * mu mod n</p>
+
+<p>lambda = (p-1)*(q-1) = 10*12 = 120
+mu = lambda^-1 mod n = 120^-1 mod 143</p>
+
+<p>m = L(9637^120 mod 143^2) * (120^-1 mod 143) mod 143</p>
+
+<p>m = 42</p></li>
+
+<li><p>note that you should use modular inverse to compute mu</p></li>
+</ul>
+
+<h5 id="homomorphic-properties">Homomorphic Properties</h5>
+
+<p>Now that we defined the the procedure to generate a keypair, encrypt and decrypt let&rsquo;s
+discuss the homomorphic properties of Paillier .</p>
+
+<ul>
+<li><p>Addition :</p>
+
+<ul>
+<li>The product of two ciphertexts decrypts to their sum , if I want to do addition on ciphertexts relatively to my plaintexts I have to calculate the product of the ciphers</li>
+<li>Proof suppose E is the encryption algorithm and m1 and m2 the plaintexts :
+E(m1) * E(m2) = (g^m1*r1^n)(g^m2*r2^n) mod n^2
+              = g^(m1+m2) (r1r2)^n mod n^2
+               = E(m1+m2)</li>
+</ul></li>
+
+<li><p>Multiplication:</p>
+
+<ul>
+<li>If I have a plaintext m and a constant k then the encryption of their product evaluates to the cipher of m raised to the power k .</li>
+<li>Proof same suppositions about E,m1,m2 as before :
+E(m1)^m2 = (g^m1+r1^n)^m2 mod n^2
+         = g^(m1m2) (r1^m2)^n mod n^2
+         = E(m1m2)
+<br /></li>
+</ul></li>
+</ul>
+
+<h5 id="python-example-implementation">Python Example Implementation</h5>
+
+<p>The following code can be used to run the example we made above using the same parameters</p>
+
+<pre><code class="language-python"># we need the inverse modulo operation 
+def egcd(a, b):
+    if a == 0:
+        return (b, 0, 1)
+    else:
+        g, y, x = egcd(b % a, a)
+        return (g, x - (b // a) * y, y)
+
+def modinv(a, m):
+    g, x, y = egcd(a, m)
+    if g != 1:
+        raise Exception('modular inverse does not exist')
+    else:
+        return x % m
+
+# we also define the l function
+def l(u,n):
+    return (u-1)/n
+
+# pick two primes
+p = 11
+q = 13
+# compute n
+n = p*q
+# pick g and since p and q are of the same length we can use n+1 
+g = n+1
+# compute lambda
+lda = (p-1)*(q-1)
+# compute mu
+mu = modinv(lda,n)
+# declare a message
+m = 42
+# pick r such as r&lt;n
+r = 23
+# compute the cipher text
+c = g**m * (r ** n % n ** 2)
+# let see the ciphertext
+print(c)
+# decrypt the ciphertext note the position of the parenthesis
+d = l(c**lda % n**2,n) * mu % n
+print(d)
+# let's make an addition
+k = 10
+# encrypt k
+ck = g**k * (r**n % n**2)
+# decrypt and save k
+dk = l(ck**lda % n**2,n) * mu % n
+# verify E(m) * E(k) == E(m+k)
+cres = ck * c
+# decrypt result 
+dres = l(cres**lda % n**2,n) * mu % n
+
+</code></pre>
+
+<p><strong>Ending Notes</strong> : I don&rsquo;t think I treated every bit of the subject in this blogpost but the aim was to present and explain
+the ideas as clearly as possible for a more in depth treatment you can read the references below .
+Other schemes that are partially homomorphic are Elgamal ( yes the same one used by GNUPGP ), Goldwasser-Micali, and
+the Boneh-Goh-Nissim that operates on elliptic curves .</p>
+
+<p>I would like to thank <a href="https://twitter.com/iamtrask">Andrew Trask</a> for his suggestions and taking time to read an early draft .</p>
+
+<h4 id="references">References</h4>
+
+<ul>
+<li>Abstract Algebra : A book of abstract algebra by Charles C.Pinter</li>
+<li>Number Theory : Summing it up by Avner Ash and Robert Gross</li>
+<li>Paillier Paper : <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.112.4035&amp;rep=rep1&amp;type=pdf">PDF</a></li>
+<li>Gentry 2009 FHE using Ideal Lattices : <a href="https://crypto.stanford.edu/craig/">Link</a></li>
+<li>Goldwasser-Mical : <a href="https://www.wikiwand.com/en/Goldwasser%E2%80%93Micali_cryptosystem">Wiki</a></li>
+<li>Boneh-Goh-Nissim : <a href="https://crypto.stanford.edu/~dabo/papers/2dnf.pdf">PDF</a></li>
+</ul>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

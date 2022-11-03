@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Graph Theory 101</title>
+        
+        <style>
+
+    html body {
+        font-family: 'Sarabun', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: darkblue;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://radicalrafi.github.io/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sarabun">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/sh.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.53" />
+        
+
+        
+    </head>
+
+    
+    
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+
+   <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+        
+
+       <body>
+         
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Graph Theory 101</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/posts/">Posts</a></li>
+                            
+                                <li><a href="/projects/">Projects</a></li>
+                            
+                                <li><a href="/writings/">Writings</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:radicalrafi@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/radicalrafi/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/radicalrafi/"><i class="fa fa-twitter"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://www.linkedin.com/in/username/"><i class="fa fa-linkedin"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://stackoverflow.com/users/10203194/halius"><i class="fa fa-stack-overflow"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+      
+
+    <h4><a href="/posts/graph-theory-1/">Graph Theory 101</a></h4>
+    <h5>an introduction to graph theory</h5>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<p>Graph theory is a field of discrete mathematics, discrete in the sense that the structures we deal with are <em>distinct</em> and are not subject to properties
+of closeness such as <em>continuity</em>.Graph theory is one of the notable branches in mathematics.It can be used to model different kinds of problems and is also
+one of the fields with the most <a href="http://www.openproblemgarden.org/category/graph_theory">open problems</a>.</p>
+
+<p>In this series of posts I will give a technical exposition to graph theory, discuss few ideas and also show you a parable about proofs in mathematics.
+For the first post I will give an exposition of graphs as objects and discuss some representations. I will then discuss the <em>usage</em> of graphs as data structures.
+In the next posts I will try to branch into algorithms and applications of graphs to some problems.</p>
+
+<h2 id="why-graph-theory">Why Graph Theory</h2>
+
+<p>Graph theory is useful in modeling a lot of problems we face IRL such as how to effectively deliver 4 food orders around town, or how to select the best combinations to
+break a pin code or how to effectively arbitrage between currencies (triangular arbitrage) &hellip; Graphs became important as tools to solve such problems.
+The most remarkable one, also being foundational in <em>topology</em> and <em>graph theory</em> is <a href="https://en.wikipedia.org/wiki/Seven_Bridges_of_K%C3%B6nigsberg">Euler&rsquo;s Konisberg Problem</a></p>
+
+<ul>
+<li><img src="https://upload.wikimedia.org/wikipedia/commons/5/5d/Konigsberg_bridges.png" alt="konisberg" /></li>
+</ul>
+
+<p>Here&rsquo;s how one might represent this problem using graphs which might seem more intuitive :</p>
+
+<ul>
+<li><img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Koenigsberg_Bridges_Variations_Graph7.png" alt="konisgraph" /></li>
+</ul>
+
+<p>You can read <a href="https://www.maa.org/press/periodicals/convergence/leonard-eulers-solution-to-the-konigsberg-bridge-problem">more</a> about Euler&rsquo;s proof.</p>
+
+<h2 id="what-is-a-graph">What is a graph ?</h2>
+
+<p>A graph, mathematically, is an <em>ordered pair</em> of sets $(V,E)$  the first is the set of <em>vertices</em> also called nodes it has to be <em>non-empty</em>.The second is a collection of <em>pairs</em> called edges.
+Edges are a two element subsets of V, meaning that each element of E is a pair of elements in V. An edge represents the link between two vertices in a graph.</p>
+
+<p>\[ G=(V,E) |\ V = \{ v_1,v_2,v_3&hellip;,v_n \} \ | E = \{e_k\}_k \in \{1,..,n\}, e_k = \{\{ v_i,v_j \}\} \ (i, j) \in \mathbb{N}\]</p>
+
+<p>So, $ E $ is a set of pairs $ {e_k} $ denotes an element of E where $ \mathit{k} $ is an index.
+An edge is thus an un(ordered) pair of vertices,
+if the Graph is directed which we&rsquo;ll call a <strong>digraph</strong> then the pair is <strong>ordered</strong> and \[ (v_i,v_j) \neq (v_j,v_i) \]</p>
+
+<p>Visually digraph&rsquo;s edges have arrows that denote the origin and destination of the edge respectively.</p>
+
+<p>A Graph is also this (visually):
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/6n-graf.svg/333px-6n-graf.svg.png" alt="basic" />
+<img src="https://momath.org/wp-content/uploads/2013/10/graph_theory-300x292.jpeg" alt="complexer" /></p>
+
+<p>A directed graph :
+<img src="https://qph.fs.quoracdn.net/main-qimg-0563516a0d43b1653e59ce5c838d9b46" alt="digraph" />
+<img src="https://i.stack.imgur.com/vjd3r.jpg" alt="mdigraph" /></p>
+
+<p>You should think of Graphs as just <em>mathematical objects</em> with certain <em>nice</em> properties.
+Trees such as binary trees are also graphs since every tree can be written as a set of <em>vertices</em> and <em>edges</em>.
+We will look at trees sometime later but for now I hope the idea of what is a graph is now clear.</p>
+
+<p>Edges can be <strong>loops</strong> as well such as in the example below in the <em>test your understanding section</em> .
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/6n-graph2.svg/220px-6n-graph2.svg.png" alt="loop" /></p>
+
+<p>There&rsquo;s no requirements for graphs to have edges, in case where a graph has no edges each vertex is said to be isolated.</p>
+
+<h3 id="properties-and-terminology">Properties and terminology</h3>
+
+<ul>
+<li><p>Adjacency : $(v_i,v_j)$ a pair of vertices is said to be adjacent if it belongs to E meaning there&rsquo;s an edge betwen them.</p></li>
+
+<li><p>Neighbors : For each element $v_i$ of $V$ we can take a subset of $V$,it&rsquo;s neighbors noted as $\mathit{A(v)}$ such as for each $ v_k \, in \, \mathit{A(v_i)}$ we have
+            $ (v_i,v_k) \in E $</p></li>
+
+<li><p>Subgraphs : If $ G(V,E) $ is a graph and we take $ V&rsquo; \subset V $ and $ E&rsquo; \subset E $ then we can define $ G&rsquo;(V&rsquo;,E&rsquo;) $ as a <em>proper</em> subgraph of $ G $,
+            in the case where $ V&rsquo; = V $ then $ G&rsquo; $ is said to <em>span</em> $ G $</p></li>
+
+<li><p>Degree : A vertex $ v_j $ is said to have $ k$-degrees if it&rsquo;s connected to $k$-vertices
+        if $G$ is directed (digraph) then we separate it&rsquo;s degrees to two <em>in-degrees</em> and <em>out-degrees</em> , in-degrees are the number of edges ending in $v_j$ , out-degrees
+            is the number of edges originating in $v_j$</p></li>
+</ul>
+
+<p><em>P.S</em> :  In the case of a graph a loop adds 2 to the degree because each one can be seen as an adjacent vertex, in the case of a digraph a loop adds 1 to the in-degree
+and 1 to the out-degree.</p>
+
+<p>Another property of graphs, as a theorem states :</p>
+
+<ul>
+<li>\[2|E| = \sum_{i=1}^{n}deg(v_i) \]</li>
+</ul>
+
+<p>Where $|E|$ denotes the <em>Cardinal</em> of $E$ (number of elements of the set)</p>
+
+<ul>
+<li><strong>Proof</strong> : The degree of a vertex represents to how many other vertices it&rsquo;s connected to.Thus since every edge connects two vertices by summing over the degrees we end up counting each edge
+twice, for example if we have $ e = \{v_1,v_2\} $ then the sum of degrees will be &hellip;</li>
+</ul>
+
+<h3 id="test-your-understanding">Test your understanding</h3>
+
+<p>Consider the examples below :</p>
+
+<ul>
+<li><p>Draw a graph G given
+$ V = \{u,v,w,x,y,z\} $ and $ E = \{\{u,v\},\{u,w\},\{u,x\},\{v,x\},\{x,y\},\{y,z\},\{z,w\}\} $</p></li>
+
+<li><p>Given  the following Graph give the sets $V$ and $E$ <img src="https://i.imgur.com/YRSsMJi.png" alt="g" /></p></li>
+</ul>
+
+<h3 id="moving-around-graphs">Moving around graphs</h3>
+
+<p>Given a graph $G(V,E)$ we define a <strong>path</strong> as a sequence of vertices $\{v_1,v_2,&hellip;,v_n\} $ such as $ \{v_k,v_{k+1} \}  \in E : k \in \{1,..,n-1\} $</p>
+
+<p>Paths are said to be <strong>simple</strong> if they don&rsquo;t have loops or repeated edges, a path is said to be a <strong>cycle</strong> if it goes back to where it start i.e $ v_0 = v_n $</p>
+
+<p>Paths will be the subject of most our graph problems finding short paths,or whether paths or cycles do exists are concrete problems you&rsquo;ll often meet in coding problems.</p>
+
+<ul>
+<li><p><img src="https://i.imgur.com/xOPUcyN.png" alt="ex" /></p></li>
+
+<li><p>Path 1 : $ (4,0,2,4,5) $ is not a simple path because $(4,2)$ was included twice</p></li>
+
+<li><p>Path 2 : $ (1,4,0,5,1) $ is a cycle</p></li>
+</ul>
+
+<h3 id="connectivity">Connectivity</h3>
+
+<p>Graphs are said to be <strong>connected</strong> if for every pair $ (u,v) : u \neq v $ there&rsquo;s at least a path between them.</p>
+
+<ul>
+<li>A very connected graph!
+<img src="https://i.imgur.com/fyTGO1I.png" alt="connected" /></li>
+</ul>
+
+<p>Graphs can have isolated nodes but you&rsquo;ll rarely find those since they&rsquo;re not as interesting as the others.</p>
+
+<h4 id="references">References</h4>
+
+<p>Some extra refrences :</p>
+
+<ul>
+<li><a href="https://medium.com/basecs/a-gentle-introduction-to-graph-theory-77969829ead8">https://medium.com/basecs/a-gentle-introduction-to-graph-theory-77969829ead8</a></li>
+<li><a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-042j-mathematics-for-computer-science-fall-2010/readings/MIT6_042JF10_chap05.pdf">MIT OCW Mathematics For CS : Graph Theory</a></li>
+</ul>
+
+<h2 id="graph-representations">Graph Representations</h2>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

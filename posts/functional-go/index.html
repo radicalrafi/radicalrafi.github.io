@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Functional Go : Taking The Gopher to it&#39;s extremes</title>
+        
+        <style>
+
+    html body {
+        font-family: 'Sarabun', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: darkblue;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://radicalrafi.github.io/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sarabun">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/sh.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.53" />
+        
+
+        
+    </head>
+
+    
+    
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+
+   <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+        
+
+       <body>
+         
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Functional Go : Taking The Gopher to it&#39;s extremes</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/posts/">Posts</a></li>
+                            
+                                <li><a href="/projects/">Projects</a></li>
+                            
+                                <li><a href="/writings/">Writings</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:radicalrafi@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/radicalrafi/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/radicalrafi/"><i class="fa fa-twitter"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://www.linkedin.com/in/username/"><i class="fa fa-linkedin"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://stackoverflow.com/users/10203194/halius"><i class="fa fa-stack-overflow"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+      
+
+    <h4><a href="/posts/functional-go/">Functional Go : Taking The Gopher to it&#39;s extremes</a></h4>
+    <h5>what if we push golang to it&#39; functional limits</h5>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<h2 id="the-functional-paradigm">The Functional Paradigm</h2>
+
+<p>Functional Programming is based on simple rules that aim to make programs
+consistent and makes parallelism humane and easy, functions are pure
+they don&rsquo;t mutate state , objects are immutable ,no shared state ,code is
+declarative , a computation is nothing but an evaluation of mathematical functions .</p>
+
+<p>Let&rsquo;s see an example of a function in a purely functional language :</p>
+
+<pre><code class="language-haskell">isPalindrome :: (Eq a) =&gt; [a] -&gt; Bool
+isPalindrome x = x == reverse x
+</code></pre>
+
+<p>The code above is the haskell version of the <strong>palindrome</strong> function  we all
+implemented at some point by looping trough the list and checking &hellip;
+In Haskell isPalindrome takes a list of chars that derives Equality (think can be compared)
+and returns a bool (True or False) .
+The Implementation is one line :</p>
+
+<pre><code class="language-haskell">x == reverse x
+</code></pre>
+
+<p>the argument is compared against the output of reverse which is a function that
+reverses a list .</p>
+
+<p>Let&rsquo;s see how we can have a similar function in Golang by starting with a recursive version of reverse:</p>
+
+<pre><code class="language-go">func reverse(str string) string {
+	if str == &quot;&quot; {
+		return str
+	} else {
+		return reverse(str[1:]) + string(str[0]) // a string is a byte array in golang 
+	}
+}
+</code></pre>
+
+<p>Now we have a function called reverse let&rsquo;s see how we can implement isPalindrome
+in a similar function way .</p>
+
+<pre><code class="language-go">func isPalindrome (str string) {
+    return str == reverse(str)
+}
+</code></pre>
+
+<p>As you can see this way we end up with a clear consice piece of code
+that anyone could understand , other sweet things that go can do
+in a functional manner are anonymous functions , functions in golang are
+first class citizens so we can do something like this:</p>
+
+<pre><code class="language-go">isPalindrome := func (str string) {
+    return str == reverse(str)
+}
+
+isPalindrome(&quot;radar&quot;)
+</code></pre>
+
+<p>This is just a small view of the idea of functional golang , there&rsquo;s more room
+for improvements for example go doesn&rsquo;t have batteries included functions like map,reduce
+or filter a good exercice would be to implement such functions and use them .</p>
+
+<p>For example data processing in golang is faster than python , therefore I can create
+a data pipeline to clean and organize my data much more faster than I would with golang .</p>
+
+<p>Say I have a list of numerical values that I want to statistically analysis an elegant way of doing so
+would be to group functions and apply them to a list of these values :</p>
+
+<pre><code class="language-go">
+type p func(int) int
+
+
+func apInt(functions []p, numbers []int) []int{
+	j := 0
+    output := make([]int,0)
+	for _,f := range functions {
+		for j &lt; len(numbers) {
+			fmt.Println(f(numbers[j]))
+			output = append(output,f(numbers[j]))
+            j++
+		}
+	}
+    return output
+}
+</code></pre>
+
+<p>there you go now functions is an array of functions that can be declared like this :</p>
+
+<pre><code class="language-go">	listOfFuncs := []p{a, b}
+</code></pre>
+
+<p>and will work on all int slice with no side effects .</p>
+
+<p>I just started working on <a href="https://github.com/radicalrafi/lori">lori</a> a <strong>Golang</strong> library that aims
+to offer such useful things to other developers and make functional go fun and possible .</p>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

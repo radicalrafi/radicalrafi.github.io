@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Parsing Binary File Formats : Forbidden Arts</title>
+        
+        <style>
+
+    html body {
+        font-family: 'Sarabun', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: darkblue;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://radicalrafi.github.io/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sarabun">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/sh.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.53" />
+        
+
+        
+    </head>
+
+    
+    
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+
+   <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+        
+
+       <body>
+         
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Parsing Binary File Formats : Forbidden Arts</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/posts/">Posts</a></li>
+                            
+                                <li><a href="/projects/">Projects</a></li>
+                            
+                                <li><a href="/writings/">Writings</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:radicalrafi@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/radicalrafi/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/radicalrafi/"><i class="fa fa-twitter"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://www.linkedin.com/in/username/"><i class="fa fa-linkedin"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://stackoverflow.com/users/10203194/halius"><i class="fa fa-stack-overflow"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+      
+
+    <h4><a href="/posts/parsing-binary-formats/">Parsing Binary File Formats : Forbidden Arts</a></h4>
+    <h5>what it is, why and when and how ?</h5>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<p>The computing/programming field contains a lot of these small tasks or <em>things</em> that fall under what I call forbidden arts, forbidden is a bad word dark maybe better,
+because unless you&rsquo;re put into a situation that requires it from you, you have less than 1% probability of actually doing/needing to do it.</p>
+
+<p>My first encounter with this problem has been a year and half ago, while building a project. Using an open-source solution is often possible and best, but then
+you need to do the task for 10,000,000 files and Python isn&rsquo;t really made for it. After searching for a while for an explainatory guide I came out empty handed and mostly
+found breadcrumbs for how to do it.</p>
+
+<p>In this post I&rsquo;ll try to do it live i.e by parsing a very complex file format using Golang and the specification.
+First so it can serve as a guideline for later bycomers and more importantly to remind myself of the darkness lurking behind these shiny devices :) .</p>
+
+<h2 id="what-is-a-file-format-actually">What is a file format actually ?</h2>
+
+<p>We all know that computers deal with bits, so everything is actually a sequence of bytes somewhere.Interpretation is where things start to become fuzzy
+when your media player opens a file it first verifies that it knows it&rsquo;s format (try opening a doc file with VLC).A file format is kind of like an index
+to make it possible to go into the important parts and jump around.Essentially a file format is just a way to organize those bytes in a standard, deterministic way.
+Determinism is why computers actually work, you don&rsquo;t see your program giving you random results at each execution altough it certainly happens.</p>
+
+<p>Suppose you want to write an MP3 Player then you&rsquo;ll need to find a way to read MP3 files as raw bytes and then manipulate them so they can be transformed to sound.
+The latter part is for the hardware, the first part is what we&rsquo;re going to focus on.</p>
+
+<p>The file format thus organizes the <strong>data</strong> so that it&rsquo;s recognized as what it is (image,sound,executable,text&hellip;)</p>
+
+<h2 id="obscenities-in-computing">Obscenities in computing</h2>
+
+<p>File formats are sometimes protected and undocumented, meaning you have no official document such as RFC that tells you what it is at byte 6 or 41857.
+Some formats are open and documented using a specification, meaning there&rsquo;s an exact document that walks you trough each byte and what it represents
+for example an MP3 file will encode in it&rsquo;s header (first 4 bytes) information about versions,layers,bit rate,frequencey&hellip; similarly a PDF file will encode
+page numbers,fonts,titles &hellip;</p>
+
+<p>In this example I choose a complex file format since I am very familiar with it,I&rsquo;ll also focus on parsing the header only.</p>
+
+<p>Our <a href="https://docs.microsoft.com/en-us/windows/desktop/debug/pe-format">target</a> is the <strong>venerable</strong> PE file format (Portable Executable) it&rsquo;s Windows proprietary file format
+for .exe files (extensions are just naming conventions it&rsquo;s the actual magic that tells you what a filetype a file is).</p>
+
+<h2 id="magic-bytes-and-identities">Magic bytes and identities</h2>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

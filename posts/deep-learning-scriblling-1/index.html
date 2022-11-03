@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Deep Learning Scribbling : Deep Learning Frameworks I</title>
+        
+        <style>
+
+    html body {
+        font-family: 'Sarabun', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: darkblue;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://radicalrafi.github.io/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sarabun">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/sh.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.53" />
+        
+
+        
+    </head>
+
+    
+    
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+
+   <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+        
+
+       <body>
+         
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Deep Learning Scribbling : Deep Learning Frameworks I</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/posts/">Posts</a></li>
+                            
+                                <li><a href="/projects/">Projects</a></li>
+                            
+                                <li><a href="/writings/">Writings</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:radicalrafi@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/radicalrafi/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/radicalrafi/"><i class="fa fa-twitter"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://www.linkedin.com/in/username/"><i class="fa fa-linkedin"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://stackoverflow.com/users/10203194/halius"><i class="fa fa-stack-overflow"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+      
+
+    <h4><a href="/posts/deep-learning-scriblling-1/">Deep Learning Scribbling : Deep Learning Frameworks I</a></h4>
+    <h5>Using Deep Learning Frameworks an Intro</h5>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<p>This is a series of posts about deep learning, not how to classify <strong>Fashion MNIST</strong> but more on how to use the science and it&rsquo;s tools . I will discuss Frameworks, Architecturing, Solving Problems and a Bunch of <em>flash notes</em> for things that we forget about , alas we are not machines .</p>
+
+<h2 id="deep-learning-frameworks">Deep Learning Frameworks</h2>
+
+<p>Deep Learning frameworks are quite interesting, because they require a very hardcore feat of engineering in between providing cross-platform software, ultra-fast computation, numerical correction and most of all a <strong>PYTHON</strong> interface .</p>
+
+<p>They come in two varieties <a href="https://ai.stackexchange.com/questions/3801/what-is-a-dynamic-computational-graph">Dynamic</a> and <a href="http://nicodjimenez.github.io/2017/10/08/tensorflow.html">Static</a> . I like to separate them using another <em>metric</em> <strong>UX</strong> there are those that can be used , and those that can&rsquo;t be used . Usage = (Time to Solve) - (Time to Fight Tool) .</p>
+
+<p>Away from this comedy of <em>emacs</em> vs <em>vim</em> as it&rsquo;s all about user preference (but really tensorflow ?) Let&rsquo;s try to decipher how the framework is built how can it be used and how to go from <em>architecture</em> to <em>code</em> .</p>
+
+<p><strong>P.S</strong> : I didn&rsquo;t mention Keras because Keras is actually the knife compared to Tensorflow <em>the rusty chainsaw</em> or PyTorch <em>the scalpel</em> .</p>
+
+<h2 id="what-is-deep-learning-in-1-line">What is Deep Learning in 1 Line .</h2>
+
+<p>Deep Learning is trying to approximate an unknown <em>function</em> using a set of examples .</p>
+
+<h2 id="in-more-lines">In More Lines</h2>
+
+<h3 id="learning-representations">Learning Representations</h3>
+
+<p>Deep Learning is a model that approximates any function by learning representations of the functions and trying to generalize from . Learning Representations is what happens when layers or neurons weights are optimized . The Linear Operation $ Y = W*X+b$ is a way to learn linear relations where  as by introducing a new component <em>the activation function</em>
+ that introduces non linearities to the learning process , non-linear as $ Y = Z(W*X+b) = max(0,W*X+b) $ .</p>
+
+<p><strong>Representations</strong> a/k/a <strong>Features</strong> are the <em>characteristics</em> that describe your input data , features are essentially <em>Random Variables</em> , engineering features means constructing meaningful characteristics for your inputs . Good Features are essential for a successful and <em>easier</em> learning t , Deep Neural Networks have this ability to learn good features by <em>training</em> , the subsequent stacking of layers is like a representation filter that tries to learn <strong>good representations</strong> to give to the output layer for example <em>softmax</em>  that act as a classifier .</p>
+
+<p>The <strong>hidden layers</strong> act slike a feature engineering pipeline that does what used to be a manual domain-driven task automatically and maybe better (ConvNets) .</p>
+
+<p>Layers such as the <strong>Convolutional Layer</strong> are efficient representation learner that learns small patterns in parts of images . Images are Tensors <em>mathematically</em> but more importantly Images have a visual structure a Flat Image would be hard to understand where as a Normal Image can tell a 1000 words . The Convolution operation that essentially scans a tensor and multiplies by a <em>Filter</em> or <em>Kernel</em> will learn a specific representation from each part and also keeps the structure of the image intact , * <strong>Nose</strong> is in the center * becomes a learnable representation (more on this another time )</p>
+
+<p>**N.B : **
+   * A <a href="https://www.deeplearningbook.org/contents/representation.html">Note</a></p>
+
+<h2 id="getting-started-with-keras">Getting Started with Keras</h2>
+
+<p>Keras is a modular wrapper around <em>Tensorflow</em> it&rsquo;s the <strong>actual</strong> reason Tensorflow is used by so many people* . Keras let&rsquo;s you build models brick by brick in the literal sense (Sequential) or by Tele-Kinesis (Functional API &lt;3 ) .</p>
+
+<p>Keras provides you with a highly friendly <em>API</em> to turn any architecture you have in mind to code and train and test it at the same time .</p>
+
+<h3 id="blocks">Blocks</h3>
+
+<p>Deep Learning requires some tools , first you have to design the network architecture whether you
+are using a Fully-Connected-Layer or a series of Conv -&gt; MaxPool you need to have in mind a way to approach the problem . Generally as a rule of thumb we have these heuristics :</p>
+
+<ul>
+<li>CNNs for Images</li>
+<li>RNN, 1D-CNNs for Text</li>
+<li>Boosting, Random Forests or Categorical Embeddings or Wide &amp; Deep for Structured Data</li>
+
+<li><p>VAE, GAN , {xyz}-GAN for Generative</p></li>
+
+<li><p>N.B : *</p></li>
+
+<li><p>Tensorflow is the default Keras Backend</p></li>
+</ul>
+
+<p>Next you need to preprocess your data , as you may know NNs love (0,1) values so you will have
+to often  <a href="http://statisticsbyjim.com/glossary/standardization/">standarize your dataset</a> .</p>
+
+<p>You&rsquo;ll also need to understand ** Loss Functions ** yes because you see different problems need different loss functions and the choice of your loss function may affect your <em>convergence</em> .</p>
+
+<p>And a GPU or even better a <a href="https://colab.research.google.com">colab</a></p>
+
+<blockquote>
+<p>I love Google</p>
+</blockquote>
+
+<p>At this point you are ready to train your neural network and watch it reach 99% accuracy on <em>MNIST</em> .</p>
+
+<pre><code class="language-python"># KERAS SEQUENTIAL EXAMPLE FOR CLASSIFICATIOn
+
+from keras import models,layers,datasets
+</code></pre>
+
+<pre><code class="language-python">
+(x_train,y_train),(x_test,y_test) = datasets.mnist.load_data()
+</code></pre>
+
+<pre><code>Downloading data from https://s3.amazonaws.com/img-datasets/mnist.npz
+11493376/11490434 [==============================] - 1s 0us/step
+</code></pre>
+
+<pre><code class="language-python">import numpy as np
+</code></pre>
+
+<pre><code class="language-python">from keras import utils
+</code></pre>
+
+<pre><code class="language-python">y_test = utils.to_categorical(y_test)
+y_train = utils.to_categorical(y_train)
+</code></pre>
+
+<pre><code class="language-python"># NORMALIZE THE DATA
+
+def normalizer(x):
+    x = x.reshape((x.shape[0],28*28))
+    x = x.astype('float32')
+    x -= x.mean()
+    x /= x.std()
+    
+    return x
+
+x_train = normalizer(x_train)
+x_test = normalizer(x_test)
+
+
+# BUILD AN MLP BY STACKING LAYER OVER LAYER
+
+model = models.Sequential()
+model.add(layers.Dense(512,input_shape=(28*28,)))
+model.add(layers.Dense(396,activation=&quot;relu&quot;))
+model.add(layers.Dense(256,activation=&quot;relu&quot;))
+model.add(layers.Dense(128,activation=&quot;elu&quot;))
+model.add(layers.Dense(64,activation=&quot;elu&quot;))
+model.add(layers.Dense(32,activation=&quot;elu&quot;))
+model.add(layers.Dense(10,activation=&quot;softmax&quot;))
+
+# COMPILE THE MODEL
+model.compile(optimizer=&quot;adam&quot;,loss=&quot;categorical_crossentropy&quot;,metrics=[&quot;accuracy&quot;])
+
+# FIT THE MODEL
+
+model.fit(x_train,y_train,epochs=10,batch_size=32,validation_data=(x_test,y_test))
+</code></pre>
+
+<pre><code>Train on 60000 samples, validate on 10000 samples
+Epoch 1/10
+60000/60000 [==============================] - 22s 374us/step - loss: 0.2573 - acc: 0.9224 - val_loss: 0.1543 - val_acc: 0.9540
+Epoch 2/10
+60000/60000 [==============================] - 21s 343us/step - loss: 0.1489 - acc: 0.9561 - val_loss: 0.1494 - val_acc: 0.9594
+Epoch 3/10
+60000/60000 [==============================] - 21s 345us/step - loss: 0.1210 - acc: 0.9641 - val_loss: 0.1572 - val_acc: 0.9561
+Epoch 4/10
+60000/60000 [==============================] - 20s 341us/step - loss: 0.1052 - acc: 0.9693 - val_loss: 0.1074 - val_acc: 0.9706
+Epoch 5/10
+60000/60000 [==============================] - 21s 346us/step - loss: 0.0923 - acc: 0.9738 - val_loss: 0.1204 - val_acc: 0.9660
+Epoch 6/10
+60000/60000 [==============================] - 21s 354us/step - loss: 0.0823 - acc: 0.9768 - val_loss: 0.1306 - val_acc: 0.9656
+Epoch 7/10
+60000/60000 [==============================] - 21s 350us/step - loss: 0.0735 - acc: 0.9790 - val_loss: 0.1211 - val_acc: 0.9707
+Epoch 8/10
+60000/60000 [==============================] - 21s 349us/step - loss: 0.0735 - acc: 0.9799 - val_loss: 0.1092 - val_acc: 0.9730
+Epoch 9/10
+60000/60000 [==============================] - 21s 351us/step - loss: 0.0626 - acc: 0.9829 - val_loss: 0.1066 - val_acc: 0.9706
+Epoch 10/10
+60000/60000 [==============================] - 21s 346us/step - loss: 0.0620 - acc: 0.9834 - val_loss: 0.1070 - val_acc: 0.9709
+
+
+
+
+
+&lt;keras.callbacks.History at 0x7fa4672b96a0&gt;
+</code></pre>
+
+<h2 id="a-look-into-pytorch">A Look Into PyTorch</h2>
+
+<h3 id="models-as-code">Models as Code</h3>
+
+<p>PyTorch is essentially a library to build and train deep neural nets and also serves as a <em>Numpy on GPU</em> library .</p>
+
+<p>PyTorch gives you modules (<em>optim</em>,<em>nn</em>,<em>torchvision</em>) that can be used collectively to write your model as code and computations will be done dynamically (no model compilation like in Tensorflow)</p>
+
+<p>Let me show you an example similar to what we just did with Keras</p>
+
+<pre><code class="language-python"># http://pytorch.org/
+import torch
+</code></pre>
+
+<pre><code class="language-python">import torch.nn as nn
+import torch.nn.functional as F
+
+</code></pre>
+
+<pre><code class="language-python">class NeuralNet(nn.Module):
+    
+    def __init__(self):
+        super(NeuralNet,self).__init__()
+        
+        # Linear is the affine transformation y = w*x + b
+        self.fc1 = nn.Linear(784,512)
+        self.fc2 = nn.Linear(512,396)
+        self.fc3 = nn.Linear(396,256)
+        self.fc4 = nn.Linear(256,128)
+        self.fc5 = nn.Linear(128,64)
+        self.fc6 = nn.Linear(64,32)
+        self.fc7 = nn.Linear(32,10)
+        
+    def forward(self,x):
+        
+        # The forward pass is what happens from each layer to layer in other words
+        # the flow of inputs trough the network
+        # here we describe the activation and maxpooling operations ...
+        
+        x = F.relu(self.fc1(x))
+        x = F.relu(self.fc2(x))
+        x = F.relu(self.fc3(x))
+        x = F.relu(self.fc4(x))
+        x = F.elu(self.fc5(x))
+        x = F.elu(self.fc6(x))
+        x = self.fc7(x)
+        
+        return x
+        
+</code></pre>
+
+<pre><code class="language-python">net = NeuralNet()
+
+print(net)
+</code></pre>
+
+<pre><code>NeuralNet(
+  (fc1): Linear(in_features=784, out_features=512)
+  (fc2): Linear(in_features=512, out_features=396)
+  (fc3): Linear(in_features=396, out_features=256)
+  (fc4): Linear(in_features=256, out_features=128)
+  (fc5): Linear(in_features=128, out_features=64)
+  (fc6): Linear(in_features=64, out_features=32)
+  (fc7): Linear(in_features=32, out_features=10)
+)
+</code></pre>
+
+<p>Now we built a class NeuralNetwork with a specific architecture as you may notice
+you can create a NeuralNetwork factory that generates different models based on inputs but let&rsquo;s keep that for later .</p>
+
+<p>Let&rsquo;s define a train function that trains a Neural Network</p>
+
+<p>P.S : PyTorch deduces and executes the backward pass (backpropagation) from the forward operation .</p>
+
+<pre><code class="language-python">from torchvision import datasets, transforms, utils
+</code></pre>
+
+<pre><code class="language-python">normalizer = transforms.Compose([transforms.ToTensor(),transforms.Normalize((0.5,), (1.0,))])
+# load dataset
+train_set = datasets.MNIST(root='./data', train=True, transform=normalizer, download=True)
+test_set = datasets.MNIST(root='./data', train=False, transform=normalizer, download=True)
+
+batch_size = 100
+
+train_loader = torch.utils.data.DataLoader(
+                 dataset=train_set,
+                 batch_size=batch_size,
+                 shuffle=True)
+test_loader = torch.utils.data.DataLoader(
+                dataset=test_set,
+                batch_size=batch_size,
+                shuffle=False)
+
+</code></pre>
+
+<p>Now that our data loaders (PyTorch data generators) are created we can move to implement
+a train function this could&rsquo;ve been a method for the Neural Network defined above or just a function like we did now .</p>
+
+<pre><code class="language-python">
+
+# loss function Categorical Cross Entropy
+criterion = nn.CrossEntropyLoss()
+
+# optimizer
+optimizer = torch.optim.SGD(net.parameters(),lr=0.01,momentum=0.9)
+
+def train(epochs):
+
+    for epoch in range(epochs):
+        # trainning
+        loss = 0
+        for batch_idx, (x, y) in enumerate(train_loader):
+            
+            optimizer.zero_grad()
+            x = x.view(-1, 28*28)
+            x = torch.autograd.Variable(x)
+            y = torch.autograd.Variable(y)
+            out = net(x)
+            loss = criterion(out, y)
+            loss = loss * 0.9 + loss.data[0] * 0.1
+            loss.backward()
+            optimizer.step()
+            if (batch_idx+1) % 100 == 0 or (batch_idx+1) == len(train_loader):
+                print('==&gt;&gt;&gt; epoch: {} , loss : {}'.format(epoch,loss))
+</code></pre>
+
+<pre><code class="language-python">train(10)
+</code></pre>
+
+<pre><code>==&gt;&gt;&gt; epoch: 0 , loss : Variable containing:
+ 0.1895
+[torch.FloatTensor of size 1]
+
+==&gt;&gt;&gt; epoch: 0 , loss : Variable containing:
+ 0.2116
+[torch.FloatTensor of size 1]
+
+==&gt;&gt;&gt; epoch: 0 , loss : Variable containing:
+ 0.2514
+[torch.FloatTensor of size 1]
+
+==&gt;&gt;&gt; epoch: 0 , loss : Variable containing:
+ 0.2384
+[torch.FloatTensor of size 1]
+
+==&gt;&gt;&gt; epoch: 0 , loss : Variable containing:
+ 0.1595
+[torch.FloatTensor of size 1]
+
+==&gt;&gt;&gt; epoch: 0 , loss : Variable containing:
+ 0.1628
+[torch.FloatTensor of size 1]
+
+==&gt;&gt;&gt; epoch: 1 , loss : Variable containing:
+ 0.1872
+[torch.FloatTensor of size 1]
+
+==&gt;&gt;&gt; epoch: 1 , loss : Variable containing:
+ 0.2300
+[torch.FloatTensor of size 1]
+
+==&gt;&gt;&gt; epoch: 1 , loss : Variable containing:
+ 0.1256
+[torch.FloatTensor of size 1]
+
+
+==&gt;&gt;&gt; epoch: 2 , loss : Variable containing:
+1.00000e-02 *
+  2.0228
+[torch.FloatTensor of size 1]
+
+    **many lines later**
+
+==&gt;&gt;&gt; epoch: 9 , loss : Variable containing:
+ 0.1006
+[torch.FloatTensor of size 1]
+</code></pre>
+
+<pre><code class="language-python">
+# test function will evaluate the neural network accuracy 
+
+def test(epoch):
+    net.eval() 
+    test_loss = 0
+    correct = 0
+    acc_history = []    
+    for data, target in test_loader:
+        data = data.view(-1,28*28) # view is equivalent to np.reshape
+        data = torch.autograd.Variable(data, volatile=True) 
+        target = torch.autograd.Variable(target)
+        
+        output = net(data)
+        test_loss += F.nll_loss(output, target).data[0]
+        pred = output.data.max(1)[1] # get the index of the max log-probability
+        correct += pred.eq(target.data).cpu().sum()
+
+        test_loss = test_loss
+        test_loss /= len(test_loader) # loss function already averages over batch size
+        accuracy = 100. * correct / len(test_loader.dataset)
+        acc_history.append(accuracy)
+        print('\nTest set: Average loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)\n'.format(
+            test_loss, correct, len(test_loader.dataset),
+            accuracy))
+</code></pre>
+
+<pre><code class="language-python">test(10)
+</code></pre>
+
+<pre><code>Test set: Average loss: -0.1730, Accuracy: 9147/10000 (91%)
+
+
+Test set: Average loss: -0.1756, Accuracy: 9247/10000 (92%)
+
+
+Test set: Average loss: -0.1712, Accuracy: 9344/10000 (93%)
+
+
+Test set: Average loss: -0.1444, Accuracy: 9438/10000 (94%)
+
+
+Test set: Average loss: -0.1326, Accuracy: 9533/10000 (95%)
+
+
+Test set: Average loss: -0.1468, Accuracy: 9628/10000 (96%)
+
+
+Test set: Average loss: -0.1493, Accuracy: 9728/10000 (97%)
+</code></pre>
+
+<h2 id="conclusion-for-now">Conclusion (for now)</h2>
+
+<p>This is was an appetizer to the difference between PyTorch and Keras later on we will explore how build models differ between the two and dive
+into the specifics of each such as how the Functional API works in Keras , and how to use Pytorch Loaders for your own data . Till then happy learning .</p>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

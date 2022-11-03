@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="description" content="a personal blog">
+<meta name="keywords" content="minimalist,blog,goa,machine learning,deep learning,developer">
+
+<base href="https://radicalrafi.github.io">
+
+<title>rafi&#39;s den</title>
+
+<meta name="generator" content="Hugo 0.34" />
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400|Roboto+Slab:400,700|Roboto:300,300i,400,400i,500,500i,700,700i">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://radicalrafi.github.io/css/main.css">
+
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+</head>
+<body lang="en-US">
+<div class="container">
+
+
+<header class="row text-left title">
+  <h1 class="title">Machine Learning for Malware Triage and Classification</h1>
+</header>
+<section id="category-pane" class="row meta">
+  
+  <div class="col-md-12">
+    <h6 class="text-left meta">
+        PUBLISHED ON NOV 16, 2017 
+      
+    </h6>
+  </div>
+  
+</section>
+<section id="content-pane" class="row">
+  <div class="col-md-12 text-justify content">
+    
+
+<h1 id="machine-learning-for-static-malware-classification-an-overview-and-in-depth-evaluation">Machine Learning for Static Malware Classification an Overview and in-depth evaluation</h1>
+
+<h2 id="for-a-better-reading-you-might-check-the-version-on-medium-here-https-medium-com-radicalrafi-untitled-document-md-87f85d658a9a">For a better reading you might check the version on Medium <a href="https://medium.com/@radicalrafi/untitled-document-md-87f85d658a9a">here</a></h2>
+
+<p><strong>Abstract</strong>:I would start by giving some context,I started researching this subject in November 2016 later I posted an article on [Ressource Infosec magazine]() the article contained only a small part of what I researched ,soon after exams,life and college trains hit me and stopped the work for a while then summer started procrastination level went up and just sat on this,then Defcon &amp; BSides happened and I saw the talks given by <a href="https://twitter.com/drhyrum">Hyrum Anderson</a> <a href="https://media.defcon.org/DEF%20CON%2025/DEF%20CON%2025%20presentations/DEFCON-25-Hyrum-Anderson-Evading-Next-Gen-AV-Using-AI.pdf">Bot vs Bot</a> <a href="https://github.com/endgameinc/youarespecial">Your Model isn&rsquo;t special</a> and It pumped me because for the first time I had a strong baseline to compare my old research which is hosted here [Github]() it&rsquo;s uncomplete ,here&rsquo;s what I tought of or did :</p>
+
+<ul>
+<li>I tought about using RL Methods and a GAN architecture to train a Generative Model to generate Binaries that bypasses the Discrimantor classifier but didn&rsquo;t start because I couldn&rsquo;t afford the computational expenses of such models and I&rsquo;m still a newbie when it comes to State of the Art deep learning .</li>
+<li>Convolutional Neural Networks : This hit me when I was &ldquo;thinking outside the box&rdquo; so what if instead of parsing &amp; analyzing the binary files we just read the bytes and interpret them into a picture and we feed it to a CNN ? I did some work here but will post an indepth look in part III.</li>
+<li>The Deep Learning Era:<a href="https://speakerdeck.com/szilard/machine-learning-software-in-practice-quo-vadis-invited-talk-kdd-conference-applied-data-science-track-august-2017-halifax-canada">Deep Models don&rsquo;t work so well  when it comes to numerical and structured data</a> in other words you can just import XGBoost and get an amazing classifier with less computation ressources and data wrangling but it&rsquo;s also a question of context we are working on static data when working with dynamic analysis outputs RNN or LSTM would be interesting to check</li>
+<li>The problem is solved from an &ldquo;academic&rdquo; point of view most classifier we will see will get ~&gt;98% True positive rate and a mildly interesting FP rate .</li>
+<li>I will be using the feature extraction script by the folks at Endgame because it&rsquo;s written in a more usable format and it&rsquo;s great ! .</li>
+<li>Bring Your Own Data I&rsquo;ll come to this later but I&rsquo;ll try  to share a big enough Dataset soon (~ 1 Million Samples) once I download &amp; process all of them (Wifi sucks in Africa)</li>
+</ul>
+
+<p>This an introductory article where I assume you know what a computer is ,what a malware is and you have dabbled with ML before (import scikit fit predict YAAAAY) .
+I won&rsquo;t be getting much into the inside-out of ML we will look at how  different classifiers perform and of course scream at slow computers .</p>
+
+<p>Have a nice read and leave a comment .</p>
+
+<h2 id="part-i-features-for-static-malware-classification">Part I : Features for Static Malware Classification</h2>
+
+<p>First of let&rsquo;s discuss the meaning of <em>static</em> ,static means that the files don&rsquo;t run and we extract features by exploring the raw bytes on disk of the binaries using the SPEC of the file format <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms680547.aspx">The PE File Format in this case</a> and other misc data we can extract like Strings,Byte Entropy &amp; Histograms &hellip;
+The problem with this approach is that you may fall in the case where a Good Binary is detected as Malicious (False Positive) or the other way a Malicious Binary detected as Good (False Negative) because of some similarities but if you have a good set of feature you can probably get a gread classification ratio (99% ~ 1%) ,features constitute 80% of your Machine Learning application the better the feature the better the accuracy and you can go to greath lentgh in feature engineering using either domain knowledge or raw computing using feature extraction &amp; selection algorithms (Maybe using Autoencoders to reduce the dimensions or Random Forest feature importance or Recursive feature-elemination ) or (Crafting features based on Domain Knowledge for example extracting URLs from Strings and querying for those (Malicious Domains Database),Calculating the entropy to detect Packing and Data Encryption,Using a combination of blacklisted api-calls (VirtualAlloc-&gt;WriteProcessMemory-&gt;CreateRemoteThread but this works better using Dynamic Analysis output with a RNN or LSTM (Neat way) &hellip; ) the limitation that static analysis poses is that there&rsquo;s only a number of things you can extract and use from raw bytes ,that&rsquo;s why you see Dynamic Analysis being used to confirm the maliciousness of a file but the issue is it&rsquo;s expensive to run it and it&rsquo;s a tricky thing for example using Cuckoo on Top of Virtual Box needs to be hardned since a lot of malwares check against the presense of these (Anti Reverse Engineering is another subject) a solution that may rise is the use of Bare Metal virtualization (XEN for example) you solve the detection problem but it&rsquo;s expensive (money wise and computaion wise) to deploy a Multiple Xen setup each time you need to analyze a new sample thus some antivirus use an <a href="http://computervirus.uw.hu/ch11lev1sec4.html">emulator</a> the best way to do dynamic analysis is using OS Sandboxing like AppContainer on Windows but even that isn&rsquo;t a perfect solution.</p>
+
+<p>Let&rsquo;s start by enumerating the features we will be extracting :</p>
+
+<p>Academia has some history with this :
+* Schultz, et al., 2001: <a href="http://128.59.14.66/sites/default/files/binaryeval-ieeesp01.pdf">http://128.59.14.66/sites/default/files/binaryeval-ieeesp01.pdf</a>
+* Kolter and Maloof, 2006: <a href="http://www.jmlr.org/papers/volume7/kolter06a/kolter06a.pdf">http://www.jmlr.org/papers/volume7/kolter06a/kolter06a.pdf</a>
+* Shafiq et al., 2009: <a href="https://www.researchgate.net/profile/Fauzan_Mirza/publication/242084613_A_Framework_for_Efficient_Mining_of_Structural_Information_to_Detect_Zero-Day_Malicious_Portable_Executables/links/0c96052e191668c3d5000000.pdf">https://www.researchgate.net/profile/Fauzan_Mirza/publication/242084613_A_Framework_for_Efficient_Mining_of_Structural_Information_to_Detect_Zero-Day_Malicious_Portable_Executables/links/0c96052e191668c3d5000000.pdf</a>
+* Raman, 2012: <a href="http://2012.infosecsouthwest.com/files/speaker_materials/ISSW2012_Selecting_Features_to_Classify_Malware.pdf">http://2012.infosecsouthwest.com/files/speaker_materials/ISSW2012_Selecting_Features_to_Classify_Malware.pdf</a>
+* Saxe and Berlin, 2015: <a href="https://arxiv.org/pdf/1508.03096.pdf">https://arxiv.org/pdf/1508.03096.pdf</a></p>
+
+<ul>
+<li>From The PE File Format we extract the following meta data
+
+<ul>
+<li>Section Information (Name,Sizes,Entroy) (.foo is a suspicious section for ex)</li>
+<li>Exports &amp; Imports information (Holds information about Imported &amp; Exported library functions)</li>
+<li>Misc Information (Virtual Size,Debug,Relocations,Signatures,TLS)</li>
+<li>Header Information (OS Version,Liker Version &hellip;)</li>
+<li>String Informations &amp; Patterns (URLS,Paths,Registry Paths&hellip;)</li>
+<li>Byte (Raw Byte stream entropy &amp; 2D Histograms) as in Saxe et al
+<br />
+<br /></li>
+</ul></li>
+</ul>
+
+<h2 id="part-ii-visualizing-of-machine-learning-classifiers">Part II : Visualizing of Machine Learning Classifiers</h2>
+
+<p>Let&rsquo;s start by running the Feature Extraction scripts (Thanks to Endgame for this part :D )</p>
+
+<pre><code class="language-python"># running the code is as easy as in 'main.py'
+X,y,sha256 = common.extract_features_and_persist()
+</code></pre>
+
+<p>I used the following classifiers :</p>
+
+<ul>
+<li>GradientBoosting</li>
+<li>Random Forests</li>
+<li>Extra Trees</li>
+<li>SVC</li>
+</ul>
+
+<p><strong>Gradient Boosting</strong> : Performed exceptionally good with an accuracy of 0.992 on the test set .
+- <strong>Accuracy Score</strong> :0.993 ~ 99.3 %</p>
+
+<ul>
+<li><strong>Heatmap for Confusion Matrix of Gradient Boosted Trees Classifier</strong></li>
+</ul>
+
+<p><img src="http://i.imgur.com/TyrZDd2.png" alt="Heatmap showing Test Results of GradientBoosting" /></p>
+
+<p><img src="http://i.imgur.com/ZX4MHnE.png" alt="ROC AUC Curve of Gradient Boosting" /></p>
+
+<p><strong>SVC</strong> : Using the following parameters :
+- C = 0.01
+- Gamma = 0.1
+- Kernel = Poly
+- Degree = 3
+- Coef0 = 10.0</p>
+
+<p>The SVM perfomed awfully bad
+- <strong>Accuracy Score</strong> :0.532 ~ 52.3 %
+Which is like random .
+<img src="https://i.imgur.com/zXa01jo.png" alt="ROC AUC Curve of SVC" /></p>
+
+<p><strong>Extra Trees</strong> : Performed Slightly worse
+- <strong>Accuracy Score</strong>  :
+    - non optimised 0.988 ~ 98.8 %
+    - optimised 0.996 ( Max Features : log2 &amp; criterion: Entropy)
+ <strong>Heatmap for Confusion Matrix of Extra Trees</strong>
+<img src="https://i.imgur.com/MRaTYRA.png" alt="Heatmap showing Test Results of Extra Trees" />
+<img src="https://i.imgur.com/yFegoNb.png" alt="ROC AUC Curve of Non Optimized Extra Trees" />
+<img src="https://i.imgur.com/LmqAD1w.png" alt="ROC AUC Curve of  Optimized Extra Trees" /></p>
+
+<p><strong>Random Forest</strong>: Using the default parameters performance isn&rsquo;t
+- <strong>Accuracy Score</strong>  :
+    - non optimised 0.988 ~ 98.8%
+    - optimised 0.996 ~ 99.6 %</p>
+
+<p><strong>Heatmap for Confusion Matrix Non Optimized Random Forest</strong>
+<img src="https://i.imgur.com/TyrZDd2.png" alt="Heatmap showing Test Results of Non optimized Random Trees" />
+<strong>Heatmap for Confusion Matrix Optimized Random Forest</strong>
+<img src="https://i.imgur.com/HMmHXTH.png" alt="Heatmap show Test Results of Optimized Random Forest" />
+<img src="https://i.imgur.com/lDpqMrN.png" alt="ROC AUC Curve of Non Optimized Random Forest" />
+<img src="https://i.imgur.com/9u0pWQm.png" alt="ROC AUC Curve of  Optimized Random Forest" /></p>
+
+<p>As one can notice we are performing really well on this dataset we have here one can further explore the limits using extremly large dataset if you have one of those .</p>
+
+<p>Let&rsquo;s now see how they generalize on new unseen samples</p>
+
+<h4 id="random-forest-on-14-unseen-samples-confusion-matrix">Random Forest on 14 Unseen Samples (Confusion Matrix)</h4>
+
+<p><img src="https://i.imgur.com/TcSiGjZ.png" alt="" /></p>
+
+<h4 id="gradient-boost-on-14-unseen-samples-confusion-matrix">Gradient Boost on 14 Unseen Samples (Confusion Matrix)</h4>
+
+<p><img src="https://i.imgur.com/wW53pOX.png" alt="" /></p>
+
+<h4 id="extra-trees-on-14-unseen-samples-confusion-matrix">Extra Trees on 14 Unseen Samples (Confusion Matrix)</h4>
+
+<p><img src="https://i.imgur.com/N7CvntZ.png" alt="" /></p>
+
+<p>Random Forests &amp; Extra Trees both misclaasify 4 samples out of 14 (False Positives)</p>
+
+<h2 id="conclusion">Conclusion:</h2>
+
+<p>In their Talk <a href="https://twitter.com/drhyrum">Hyrum Anderson</a> pointed that Gradient Boosting achieves the best performance considering the computing time as well and from this small testing we&rsquo;ve just seen we can agree on that .</p>
+
+<p>The Misclassification is the actual problem this particular application faces it&rsquo;s actually the goal of ly research can we achieve an extremly small rate of False Positives in other words can we make sure no malware sneaks in as a legitimate application ?
+There&rsquo;s work to be done here especially in the feature engineering parts one can go and research several ideas such as what I will show you in the next posts techniques such as CNN on Images of Malwares (We turn binary files to gray scale pictures for example) or can we do Deep Learning on Disassembly (Can we do a similar work of sentiment analysis on disassembly to see if we can separate bad (malicious) &amp; good(benign) code ) ? Can we use Neural Networks to generate Signatures for unseen malwares ? How about we try to mitigate at the Infection Vector Point (ML on Malicious Documents and PDFs is the next in my list of posts now) &hellip; Many things I will discuss in the future in parallel with this research I am doing .</p>
+
+<p>The Data Issue is still relevant this field in particular unlike some others is very competitive, feature engineering plays an extremly important role and tends to be &lsquo;Proprietary&rsquo; so a standard dataset is hard to issue or to create I will take some time to dive into academia and collect the most interesting parts,I may also do some research on dynamic analysis applications and see what we can achieve on this ,till then research long and prosper <strong><em>vulcan salute</em></strong></p>
+
+  </div>
+</section>
+<section id="tag-pane" class="row meta">
+  
+  <div class="col-md-12">
+    <h6 class="text-right meta">
+      
+    </h6>
+  </div>
+  
+</section>
+
+
+
+
+
+
+
+
+<section id="menu-pane" class="row menu text-center">
+  
+  
+  <span><a class="menu-item" href="https://radicalrafi.github.io/post/path-to-pytorch/">&lt; prev | </a></span>
+  
+  
+  <span><a class="menu-item" href="/post">post</a></span>
+  
+  
+  <span><a class="menu-item" href="https://radicalrafi.github.io/post/autoencoders-as-classifiers/"> | next &gt;</a></span>
+  
+  
+  <h4 class="text-center"><a class="menu-item" href="https://radicalrafi.github.io">home</a></h4>
+</section>
+
+
+
+<footer class="row text-center footer">
+  <hr />
+  
+  <h6 class="text-center copyright">© 2017. A.B. <a href="http://creativecommons.org/licenses/by/3.0/">Some Rights Reserved</a>.</h6>
+  
+  <h6 class="text-center powered">Powered by <a href="https://gohugo.io/">Hugo</a> &amp; <a href="https://github.com/shenoybr/hugo-goa">Goa</a>.</h6>
+  
+  
+</footer>
+
+</div>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+
+<script type="text/javascript">
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'XYZ', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Crypto Journal Part III : Fully Homomorphic Encryption Part I : Secret Key Homomorphic Encryption Over Integers</title>
+        
+        <style>
+
+    html body {
+        font-family: 'Sarabun', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: darkblue;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://radicalrafi.github.io/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sarabun">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/sh.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.53" />
+        
+
+        
+    </head>
+
+    
+    
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+
+   <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+        
+
+       <body>
+         
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Crypto Journal Part III : Fully Homomorphic Encryption Part I : Secret Key Homomorphic Encryption Over Integers</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/posts/">Posts</a></li>
+                            
+                                <li><a href="/projects/">Projects</a></li>
+                            
+                                <li><a href="/writings/">Writings</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:radicalrafi@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/radicalrafi/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/radicalrafi/"><i class="fa fa-twitter"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://www.linkedin.com/in/username/"><i class="fa fa-linkedin"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://stackoverflow.com/users/10203194/halius"><i class="fa fa-stack-overflow"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+      
+
+    <h4><a href="/posts/more-homomorphic-encryption/">Crypto Journal Part III : Fully Homomorphic Encryption Part I : Secret Key Homomorphic Encryption Over Integers</a></h4>
+    <h5>Gentry&#39;s breakthrough results in simpler terms</h5>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<h3 id="ep">EP</h3>
+
+<p>In the previous post we discussed homomorphic encryption in it&rsquo;s most abstract terms
+we presented Paillier as a partially homomorphic encryption .
+Thank you <a href="https://twitter.com/mortendahlcs">@mortendahlcs</a> for making a clarification about
+the terms described :</p>
+
+<ul>
+<li>Somewhat Homomorphic means you can do both addition and multiplication but only a limited number times ( I will explain why below)</li>
+<li>Paillier doesn&rsquo;t allow multiplication between two ciphers this is called a <strong>Partially Homomorphic</strong> scheme .</li>
+</ul>
+
+<p>Alrighty then in this post I will try to explain an analogy between FHE and mathematics , and I will explain Gentry&rsquo;s
+breakthrough by using a scheme published after his first papers where instead of using <em>ideal lattices</em> the scheme uses
+integers it will be easier to explain that way and also provide examples without much math .</p>
+
+<p>In the next post we discuss Public Key HE and explain bootstrapping</p>
+
+<hr />
+
+<p>We will start with some math this way we can have an abstraction of the subject and help us understand a bit more about homomorphic encryption in general .</p>
+
+<h4 id="pre-definitions">Pre definitions</h4>
+
+<ul>
+<li><p>We will start by introducing mathematical concepts like in the last time as usual this part was made to help the reader
+gain a vocabulary to sound smart at parties everyone is amazed by the person that can say the 8 axioms that define rings as algebraic structures:</p></li>
+
+<li><p>Ring : A Ring is the savant son of the group , more precisely an <strong>abelian group</strong> , abelian here means that the group&rsquo;s operation is commutative meaning :</p>
+
+<ul>
+<li><p>If * (star) is an operation in a group G and X &amp; Y are two elements of G then we have this equality : X * Y = Y * X</p></li>
+
+<li><p>A Ring is then an abelian group but with more rules or axioms more importantly a ring has two operations mainly addition and multiplication</p></li>
+
+<li><p>It&rsquo;s closed under multiplication and addition , the product or sum of two elemnts of a Ring is an element of the ring .</p></li>
+
+<li><p>Multiplication is associative in other words if we have X,Y,Z then X * (Y * Z) = (X * Y) * Z</p></li>
+
+<li><p>Left and Right distributivity : X * (Y+Z) = X * Y + X * Z and (X + Y) * Z = X * Z + Y * Z</p></li>
+</ul></li>
+
+<li><p>Circuits : This term is present in many papers you will often face the term <em>arbitrary circuits</em> this stands for boolean circuits you  studied sometime in your life</p></li>
+
+<li><p>It&rsquo;s important to understand that until this point we discuss operations in term of circuits and bits and not generic algorithms (more on this later)</p></li>
+
+<li><p>Ring Homomorphism : We explained what homomorphism was in the last post, a ring homomorphism is a <em>function</em> between <em>two rings</em> such that :</p>
+
+<ul>
+<li>f(a+b) = f(a)+f(b) and f(a * b) = f(a) * f(b)</li>
+</ul></li>
+
+<li><p>Residue mod p : This term may sound complex but it actually means the remainder of the integer division whenever you here <em>r</em> is a <em>residue mod p</em> of a think a = r (mod p) . ( even modular forms sounds complex but it&rsquo;s <a href="https://www.amazon.com/Summing-Up-Modern-Number-Theory/dp/0691170193">simple</a></p></li>
+
+<li><p>What scheme means , when we discuss a scheme or a cryptosystem we generally mean to describe a three component system to do cryptography
+this system is composed of three algorithms .</p>
+
+<ul>
+<li>We need a Key Generation algorithm</li>
+<li>An Encryption Algorithm</li>
+<li>A Decryption Algorithm</li>
+</ul></li>
+</ul>
+
+<h4 id="gentry-s-fully-homomorphic-scheme">Gentry&rsquo;s Fully Homomorphic Scheme</h4>
+
+<p>Craig Gentry released the first fully homomorphic encryption scheme that is based on <strong>ideal lattices</strong> ( no need to know what it is for now ) on June 25st 2009 .
+His scheme was constructed from a SHE scheme ( add &amp; mul for limited number of times ) or in math words limited to evaluating low degree polynomials , <strong>limited</strong> here means
+that each ciphertext has some noise <em>S</em> in it and as you add and multiply ciphers the noise makes the end result indecipherable .
+He introduced <strong>bootstrapping</strong> which means that the <em>scheme can evaluate it&rsquo;s own decryption circuit</em> and this property can make the scheme <strong>fully homomorphic</strong>
+bootstrapping <em>refreshes</em> the ciphertext by reducing the noise in each operation .</p>
+
+<p>The scheme was considered secure but <em>impractical</em> because the bigger the <em>security parameter</em> the more computationally intensive
+was to compute the ciphers and their sizes were getting bigger .</p>
+
+<p>Later on , Gentry, Marten van Dijk,Shai Halevi et al released a scheme based on the ideas that Gentry introduced ( <strong>bootstrapping</strong> ) but this time the scheme used <em>integers</em> instead
+of ideal lattices . The lattice scheme is incredibly complex , the integer one is simpler to explain especially the bootstrapping part so we will only discuss the latter .</p>
+
+<h4 id="she-over-integers">SHE over Integers</h4>
+
+<p>Let&rsquo;s restate that Gentry&rsquo;s breaktrough was taking a somewhat fully homomorphic scheme and making fully homomorphic using bootstrapping so the scheme we
+are going to discuss now is somewhat homomorphic and we will use it to explain bootstrapping in more details.</p>
+
+<h5 id="secret-key-scheme">Secret Key Scheme</h5>
+
+<p>In cryptography we generally ( I think ) talk about two different ways to do encyption either using a secret key , i.e same key is used to encrypt and decrypto , or public key
+where on key remains private (private key) used to decrypt and a key is public (public key) used to encrypt .</p>
+
+<p>RSA for example is a public key scheme each user gets two keys let&rsquo;s take Alice and Bob for a ride :</p>
+
+<ul>
+<li>Alice generates two keys PrivK (her private key that only she knows and should keep safe) and a Public Key (she makes it public to anyone )</li>
+
+<li><p>Bob does the same process</p></li>
+
+<li><p>When Alice wants to send a secret message to Bob she uses Bob&rsquo;s public ky to encrypt the message , and only Bob can decrypt the message using his Private Key</p></li>
+</ul>
+
+<p>** You get the point **</p>
+
+<p><em>Let&rsquo;s describe the secret-key homomorphic scheme now .</em></p>
+
+<p>** As we discussed above a scheme needs three algorithms KeyGen, Encrypt, Decrypt :</p>
+
+<ul>
+<li>KeyGen : Secret Key means we only need to create one key ; In this scheme the key is an odd integer , choose from some interval [2^n-1,2^n] . Here n is what we call a security parameter .</li>
+<li>Encrypt(p,m) : m here is a bit {0,1} , to encrypt a bit set the ciphertext as an <strong>integer</strong> whose <strong>residue modulo p</strong>  has the same parity of the plaintext (m) :
+
+<ul>
+<li>c = p*q + 2*r + m</li>
+<li>c is odd if m = 1 c is even if m = 0 ( Yes 0 is even ).</li>
+<li>p is the private key we generated before, q and r are just random integers choose from a different interval than the private key one .</li>
+</ul></li>
+
+<li><p>Decrypt(p,c) :</p>
+
+<ul>
+<li>m = (c(mod p)) (mod 2)</li>
+<li>correctness : (c(mod p)) (mod 2) = (p * q + 2 * r + m (mod p)) (mod 2) = 2r + m (mod 2) = m
+<br /></li>
+</ul></li>
+
+<li><p>Example :</p>
+
+<ul>
+<li>Suppose p = 19</li>
+<li>c = 19 *  2 + 1 (q = 2,r = 0)</li>
+<li>c = 39 | 39 mod 17 = 5 | 5 mod 2 = 1</li>
+</ul></li>
+
+<li><p>two bit ( + , * ) example :</p>
+
+<ul>
+<li>Suppose p = 17 , q1 = 1 , r = 1 , q2 = 2, r2= 2</li>
+<li>bit 1 = 0</li>
+<li>bit 2 = 1</li>
+<li>c1 = p * 1 + 2 * 1 + 0 = 19</li>
+<li>c2 = p * 2 + 2 * 2 + 0 = 39</li>
+<li>c1 + c2 = 58 | 58 mod 17 mod 2 = 1</li>
+<li>c1 * c2 = 741 | 741 mod 17 mod 2 = 0</li>
+</ul></li>
+</ul>
+
+<p><strong>SCHEME HOMOMORPHISM</strong></p>
+
+<p>Let&rsquo;s verify the scheme&rsquo;s homomorphism :</p>
+
+<ul>
+<li><p>We have two cipher texts c1 and c2 :</p>
+
+<ul>
+<li>c1 + c2 =  (pq1 + 2r1 + m1) + (pq2 + 2r2 + m2)</li>
+<li>c1 + c2 = p(q1+q2) + 2(r1+r2) + (m1 + m2) = c3</li>
+</ul></li>
+
+<li><p>Decrypt(p,c3) :</p>
+
+<ul>
+<li>m3 = (c1 + c2 (mod p)) mod 2</li>
+<li>m3 = m1 + m2</li>
+<li>Because we have pq mod p = 0  and 2r mod 2 = 0 ,hence m3 = m1 + m2
+<br /></li>
+</ul></li>
+
+<li><p>Exerice to the reader to verify c1 * c2 ( same steps as before )</p></li>
+</ul>
+
+<p><strong>Intuitive Application and Code</strong></p>
+
+<p>As you may have noticed the algorithm is designed to encrypt bits {0,1} so you may ask how do I sum 2 numbers ?
+Well as you may remember we discussed circuits before and here we can see them in action .</p>
+
+<p>Adding binary numbers or just digits is done using an <a href="https://www.wikiwand.com/en/Adder_(electronics)">adder</a> .
+An adder sums two binary digits and outputs their sum and the <strong>carry</strong></p>
+
+<ul>
+<li>0 + 1 = 1 and the carry = 0</li>
+<li>1 + 1 = 0 and the carry = 1</li>
+</ul>
+
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Halfadder.gif/440px-Halfadder.gif" alt="half_adder" /></p>
+
+<p>From the gif above we can see that to construct a Half Adder we need a XOR Gate and an AND Gate ,
+the XOR Gate outputs the sum of two <strong>bits</strong> and the AND Gate outputs the carryout .</p>
+
+<p>There&rsquo;s also what we call a full adder :</p>
+
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Fulladder.gif/440px-Fulladder.gif" alt="full_adder" /></p>
+
+<p>A Full Adder can be constructed using two Half Adders and an OR Gate .</p>
+
+<p>Now we have our circuits let&rsquo;s move on two a practical example :</p>
+
+<p>The following example builds functions to add two 4 Bit numbers from {0000,1111}</p>
+
+<iframe src="https://trinket.io/embed/python3/64146c5094" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+
+<pre><code class="language-python">
+import sys
+from random import randint
+
+def tobits(val):
+    l = [0]*(8)
+
+    l[0]=val &amp; 0x1
+    l[1]=(val &amp; 0x2)&gt;&gt;1
+    l[2]=(val &amp; 0x4)&gt;&gt;2
+    l[3]=(val &amp; 0x8)&gt;&gt;3
+    return l
+
+def XOR(a,b):
+    return ( (NOT(a)*b) + (a*NOT(b)))
+
+def NOT(val):
+    return(val ^ 1)
+
+def AND(a,b):
+    return(a*b)
+
+def OR(a,b):
+    return(a+b)
+
+def HA(bit1,bit2):
+    sum=XOR(bit1,bit2)
+    carryout=AND(bit1,bit2)
+    return sum,carryout
+
+def FA(bit1,bit2,cin):
+    sum1,c1=HA(bit1,bit2)
+    sum,c2=HA(sum1,cin)
+    carryout=OR(c1,c2)
+    return sum,carryout
+
+
+
+def encrypt(bit,p):
+    #q=randint(50000, 90000)    
+    #r=randint(1,200)
+    q = 2
+    r = 0
+    return(  q * p + 2*r +int(bit)),q,r
+
+def decrypt(cipher,p):
+    return (cipher % p) % 2
+
+## values to test using same example as before
+
+val1=10
+val2=13
+
+v1=[]
+v2=[]
+
+v1=tobits(val1)
+v2=tobits(val2)
+
+cin=0
+
+#p =randint(3e23, 6e23)*2+1
+p = 17
+c_carryin,q,r=encrypt(cin,p)
+
+print(v1)
+print(v2)
+
+#Cval(i)b(j) means Cipher i Bit j
+cval1b0,q,r=encrypt(v1[0],p)
+cval2b0,q,r=encrypt(v2[0],p)
+
+cval1b1,q,r=encrypt(v1[1],p)
+cval2b1,q,r=encrypt(v2[1],p)
+
+cval1b2,q,r=encrypt(v1[2],p)
+cval2b2,q,r=encrypt(v2[2],p)
+
+cval1b3,q,r=encrypt(v1[3],p)
+cval2b3,q,r=encrypt(v2[3],p)
+
+&quot;&quot;&quot;At this point we have two ciphertext cval1,cval2 to do the sum we use a FA&quot;&quot;&quot;
+
+
+## Addition between two bit arrays 
+print(&quot;1 &quot;,c_carryin)
+c_sum1,c_carryout=FA(cval1b0,cval2b0,c_carryin )
+c_sum2,c_carryout=FA(cval1b1,cval2b1,c_carryout )
+c_sum3,c_carryout=FA(cval1b2,cval2b2,c_carryout )
+c_sum4,c_carryout=FA(cval1b3,cval2b3,c_carryout )
+
+
+
+sum1 = decrypt(c_sum1,p)
+sum2 = decrypt(c_sum2,p)
+sum3 = decrypt(c_sum3,p)
+sum4 = decrypt(c_sum4,p)
+
+carry = decrypt(c_carryout,p)
+
+
+print(&quot;Val1:&quot;,val1)
+print(&quot;Val2:&quot;,val2)
+
+print(&quot;\nResults&quot;)
+
+print(&quot;encrypted : \n&quot;)
+print(&quot;Csum1 = {}&quot;.format(c_sum1))
+print(&quot;Csum2 = {}&quot;.format(c_sum2))
+print(&quot;c_sum3 = {}&quot;.format(c_sum3))
+print(&quot;c_sum4 = {}&quot;.format(c_sum4))
+print(&quot;carry out = {}&quot;.format(carry))
+print(&quot;Sum:\t\t&quot;,carry,sum4,sum3,sum2,sum1)
+
+</code></pre>
+
+<h4 id="conclusion-notes">Conclusion &amp; Notes</h4>
+
+<ul>
+<li>In this example I tried to keep things as simple and intuitive as possible , the reader should wrap his head around dealing with bits and circuits
+because that&rsquo;s what we do here , an exercice to the reader would be to extend the above python code to 8-bit , 16-bit , 32-bit integers it&rsquo;s quite simple
+I choose 4 bit numbers because the sum of two 4 bit numbers will give us a 5 bit number this way I can show you how the carry moves around .</li>
+</ul>
+
+<p>I hope this post cleared things a bit more for you , now off you go to explore other unknown places .</p>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

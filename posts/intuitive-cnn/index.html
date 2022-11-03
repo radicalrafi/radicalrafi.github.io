@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Convolutional Neural Networks Intuition and Implementation</title>
+        
+        <style>
+
+    html body {
+        font-family: 'Sarabun', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: darkblue;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://radicalrafi.github.io/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sarabun">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/sh.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.53" />
+        
+
+        
+    </head>
+
+    
+    
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+
+   <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+        
+
+       <body>
+         
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Convolutional Neural Networks Intuition and Implementation</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/posts/">Posts</a></li>
+                            
+                                <li><a href="/projects/">Projects</a></li>
+                            
+                                <li><a href="/writings/">Writings</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:radicalrafi@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/radicalrafi/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/radicalrafi/"><i class="fa fa-twitter"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://www.linkedin.com/in/username/"><i class="fa fa-linkedin"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://stackoverflow.com/users/10203194/halius"><i class="fa fa-stack-overflow"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+      
+
+    <h4><a href="/posts/intuitive-cnn/">Convolutional Neural Networks Intuition and Implementation</a></h4>
+    <h5>understanding the idea of CNNs and writing one in pytorch</h5>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<h2 id="the-cnn">The CNN</h2>
+
+<p>The Feed Forward neural network is composed of fully connected neurons at each
+layer, the input is a flattened vector that is feed to the input neurons
+the network then is restricted from an information point of view .</p>
+
+<p>Because pictures are composed of hiearchies, an image only provides full information
+if seen in it&rsquo;s 2D view (3D actually) add to that the fact that colored images
+introduce a third dimension (color channel) that encodes more information , it
+will soon become evident that it&rsquo;s infeasible to scale simple FFN to this task
+we need a new way to extract features .</p>
+
+<p>CNNs learns a <strong>spatial hiearchy</strong> of their
+input a first convolutional layer will learn to detect <em>edges</em> a second will learn
+larger patterns made of the first one and so &hellip; these patterns are also
+translationally invariant meaning that if they learn a pattern at the top right
+of a picture they can recognize anywhere else .</p>
+
+<p>The CNN here adds a new trick (patches) also called filters , neurons
+are not connected to all other neurons but only to a few , each group is then
+locally connected and learn a partial information about the input map .</p>
+
+<p>===========================================</p>
+
+<h4 id="feature-maps-and-convolutional-layers">Feature Maps and Convolutional Layers</h4>
+
+<p>These patches become more task-oriented than generalized .</p>
+
+<p>Let&rsquo;s take a CIFAR-10 sample an image from CIFAR is of size 32x32x3 (width,height,depth)
+a first convolutional layer will take a 5x5x3 window and slide it across the image
+a convolution operates on 3D tensors ,<strong>feature maps</strong>, in CIFAR the depth is 3 (RGB)
+in mnist because the color is only shades of grey the depth is 1 .
+The height and width are parameters but the depth is always equal to the image depth .</p>
+
+<p><img src="http://cs231n.github.io/assets/cnn/depthcol.jpeg" alt="image" /></p>
+
+<p>The window or patch will extract a 2D map of the input that encodes certain
+information ,the output of the patches will be multiplied ( <strong>dot product</strong>) by a Kernel
+a transformed patch ( column vector) of the output feature map .</p>
+
+<p><img src="https://i.imgur.com/Nq6udJU.png" alt="F.Chollet Deep Learning in Python" /></p>
+
+<p>The output of the patches is controlled by 3 parameters depth,stride and padding :</p>
+
+<ul>
+<li><p>Depth is the number of filters we would like to use</p></li>
+
+<li><p>Stride is by how many pixels we slide (1 pixel,2 pixel &hellip;) we usually use 1 or 2 rarely more than 3</p></li>
+
+<li><p>Padding is just adding zeros to make the size of the input and output balanced</p>
+
+<blockquote>
+<blockquote>
+<p>The Krizhevsky et al. architecture used 11 filters 4 strides and no padding
+    it&rsquo;s input was of 227x227x3 .
+    The output of this layer had a 55x55x96 size the trick to compute it
+    is Input-Filter/Stride+1  (the architecutre used a layer with a depth = 96</p>
+</blockquote>
+</blockquote></li>
+</ul>
+
+<p>A Python example of what a convolutional layer is like :</p>
+
+<ul>
+<li>suppose we have an input image of size 11x11x4 and we will use a filter of size 5
+the depth of the filter is the same as the input is 4 .
+let&rsquo;s compute the output layers (feature map)</li>
+</ul>
+
+<pre><code class="language-python">    # the first transformed patch (column vector of the output)
+    v[0,0,0] = np.sum(X[:5,:5,:] * Ker) 
+    v[1,0,0] = np.sum(X[2:7,:5,:] * Ker)
+    v[2,0,0] = np.sum(X[4:9,:5,:] *Ker)
+    v[3,0,0] = np.sum(X[6:11,:5,:] *Ker)
+</code></pre>
+
+<p>This is just the first feature map notice how the stride is added to the first
+component only since we slide in a linear direction .</p>
+
+<h4 id="max-pooling">Max Pooling</h4>
+
+<p>The pooling layer always (by practice) follows a convolutional layer to reduce
+the spatial size of the feature maps to have less parameters to learn .
+A Pooling layer can be resumed in the following function :</p>
+
+<pre><code class="language-python">    def max_pool(width,height,depth):
+        f = 2 # filter 2 is the most used value in practice
+        s = 2 # stride
+        
+        w = (width - f)/s+1
+        h = (height -f)/s+1
+        d = depth
+        return w*h*d
+</code></pre>
+
+<p>That&rsquo;s all so if I had a 32x32x4 output after pooling I will have a 16x16x4 downsampled
+output twice less parameters to learn .</p>
+
+<h4 id="practical">Practical</h4>
+
+<p>In practice you rarely train a CNN from zero usually we leverage transfer-learning
+to train big networks such as Inception v3 ,VGG16 &hellip; and retrain their output layers
+on our problem classes .</p>
+
+<p>But let&rsquo;s see what a CNN looks like in Pytorch and Keras :</p>
+
+<p>================================================================</p>
+
+<p><strong>PyTorch</strong> :</p>
+
+<pre><code class="language-python">import torch
+from torch.autograd import Variable
+import torch.nn as nn
+import torch.nn.functional as F
+
+
+class Net(nn.Module):
+
+    def __init__(self):
+        super(Net, self).__init__()
+        # 3 input image channel, 6 output channels, 5x5 square convolution
+        # kernel
+        self.conv1 = nn.Conv2d(3, 6, 5)
+        self.conv2 = nn.Conv2d(6, 16, 5)
+        # an affine operation: y = Wx + b
+        self.fc1 = nn.Linear(16 * 5 * 5, 120)
+        self.fc2 = nn.Linear(120, 84)
+        self.fc3 = nn.Linear(84, 10)
+
+    def forward(self, x):
+        # Max pooling over a (2, 2) window
+        x = F.max_pool2d(F.relu(self.conv1(x)), (2, 2))
+        # If the size is a square you can only specify a single number
+        x = F.max_pool2d(F.relu(self.conv2(x)), 2)
+        x = x.view(-1, self.num_flat_features(x))
+        x = F.relu(self.fc1(x))
+        x = F.relu(self.fc2(x))
+        x = self.fc3(x)
+        return x
+</code></pre>
+
+<p><strong>Keras</strong> :</p>
+
+<pre><code class="language-python"># let's build a small convnet for binary classification
+from keras import layers,models
+
+model = models.Sequential()
+
+# input is 150,150,3 3 is the depth axis in the case of RGB it's 3 for each color channel red,green,blue
+model.add(layers.Conv2D(32,(3,3),activation='relu',input_shape=(150,150,3)))
+model.add(layers.MaxPooling2D((2,2)))
+
+model.add(layers.Conv2D(64,(3,3),activation='relu'))
+model.add(layers.MaxPooling2D((2,2)))
+
+model.add(layers.Conv2D(128,(3,3),activation='relu'))
+model.add(layers.MaxPooling2D((2,2)))
+
+model.add(layers.Conv2D(128,(3,3),activation='relu'))
+model.add(layers.MaxPooling2D((2,2)))
+#flatten and fc layer 
+model.add(layers.Flatten())
+model.add(layers.Dense(512,activation='relu'))
+#output 1 neuron activated using sigmoid for b-class task
+model.add(layers.Dense(1,activation='sigmoid'))
+</code></pre>
+
+<p><strong>N.B</strong> :</p>
+
+<ul>
+<li><p>ressources :</p>
+
+<ul>
+<li>Chapter 5,Deep Learning in Python by F.Chollet</li>
+<li>CS231n.github.io</li>
+</ul></li>
+
+<li><p>implementation:</p>
+
+<ul>
+<li><a href="https://github.com/radicalrafi/deep-learning-notes/blob/master/neuralnetworks/Building%20Convnets.ipynb">Notebook</a></li>
+</ul></li>
+</ul>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

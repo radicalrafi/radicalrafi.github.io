@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>C&#43;&#43; The Good The Bad and The Ugly</title>
+        
+        <style>
+
+    html body {
+        font-family: 'Sarabun', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: darkblue;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://radicalrafi.github.io/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sarabun">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/haskell.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/sh.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.53" />
+        
+
+        
+    </head>
+
+    
+    
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          processEscapes: true
+        }
+      });
+    </script>
+
+   <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+        
+
+       <body>
+         
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">C&#43;&#43; The Good The Bad and The Ugly</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/posts/">Posts</a></li>
+                            
+                                <li><a href="/projects/">Projects</a></li>
+                            
+                                <li><a href="/writings/">Writings</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:radicalrafi@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/radicalrafi/"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/radicalrafi/"><i class="fa fa-twitter"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://www.linkedin.com/in/username/"><i class="fa fa-linkedin"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://stackoverflow.com/users/10203194/halius"><i class="fa fa-stack-overflow"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+      
+
+    <h4><a href="/posts/cpp-good-bad-ugly/">C&#43;&#43; The Good The Bad and The Ugly</a></h4>
+    <h5>Yet another C&#43;&#43; opinion blogpost</h5>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<p>In a perfect word every blog should have a post to criticize C++. I personally find myself in a hard situation.
+I am in my last year of undergraduate school in Applied Mathematics thus am looking for career opportunities and C++ is in demand.
+So I end up using it and not using it,in the sense that outside of a single file or maybe tiny project C++ you&rsquo;ll find yourself less productive.
+It&rsquo;s still hell to make a GET request in C++ (try it) an it still takes 1 hour to compile project that take less than 6 minutes in Golang (Bitcoin vs BTCd).</p>
+
+<p>To me it&rsquo;s not really about compile time I like going for a coffee or a walk, to me it&rsquo;s about being productive and being able to help others with my code.
+I want my code to be easy to provide to others without having to solve OS-specific dependency problems or having to decide whether &ldquo;headers only&rdquo; is good or bad.</p>
+
+<p>The thing is C++ is what Java was in 2000&rsquo;s it&rsquo;s an enterprise language. Altough it&rsquo;s still in heavy use in the numerical departements (almost every Deep Learning or
+Numerical Library is written in C++) there&rsquo;s less users of C++ when it comes to newish tech companies and I think this is related to the fact that C++ is counter-productive.</p>
+
+<h2 id="the-good">The Good</h2>
+
+<p>Starting with good things is always the right thing to do in my opinion. What&rsquo;s good about C++ well, the following comes to mind :</p>
+
+<ul>
+<li><p>Generics: yes really that&rsquo;s the top thing in my opinion that makes C++ worth the try if you&rsquo;re specialized in the sense that you&rsquo;re building a program
+to do one exact thing then stay away from C++ but if you want to prove your data-statics like coding data-structures from scratch the Generics are great.
+I don&rsquo;t find a particular use case for them besides this one, I&rsquo;m not mad-scientist yet to use metaprogramming and don&rsquo;t feel like it.
+The only issue with generics is good luck understanding error messages.</p></li>
+
+<li><p>STL: Thanks to the Generics we get the <strong>STL</strong> now here&rsquo;s the thing, it seems that in places where C++ is used for performance the STL is considered witchcraft some hated
+piece of dark art that gets <a href="https://github.com/electronicarts/EASTL">reinvented</a> for performance reasons. For you the average programer the STL is great for doing
+coding contests and the like because you get all data structures ready to be used including some <a href="https://en.cppreference.com/w/cpp/algorithm">algorithms</a></p></li>
+
+<li><p>Speed : Ahem, well &ldquo;zero-cost abstraction and what not&rdquo;.</p></li>
+
+<li><p>Libraries : There are a lot of libraries to choose from especially when it comes to doing heavy computations (Armadillo and Eigen are imbeatable) ensmallen is a great
+library for function optimization for example, there&rsquo;s also Qt that provides GUI and replacement libraries for some tasks. I doubt you&rsquo;ll ever find yourself in a place where you
+have to write something from scratch.</p></li>
+</ul>
+
+<h2 id="the-ugly">The Ugly</h2>
+
+<ul>
+<li><p>Package Management: Unfortunately this is limbo zone at the same time there <a href="httsp://conan.io">are</a> <a href="https://github.com/Microsoft/vcpkg">a</a> <a href="https://cget.readthedocs.io/en/latest/">lot</a>
+<a href="https://cppan.org/">you</a> <a href="https://docs.hunter.sh/en/latest/">can</a> pick from and at the same time every C++ developer has an opinion about why
+other ones sucks I used vcpkg and it was &ldquo;meh&rdquo;.</p></li>
+
+<li><p>Productivity: If you want to build some kind of general purpose library well good luck, not only you need your code to be portable across compiler but also to build everywhere
+so you might use CMake then you&rsquo;ll have to learn their own DSL which comes with it&rsquo;s own hell. I still use Make to be honest. <a href="https://news.ycombinator.com/item?id=18787777">Build systems</a> tend to receive
+similar hate as well .</p></li>
+
+<li><p>Modularity and Composability: C++17 did bring the filesystem library but not everyone uses C++17 so they use Boost instead, that&rsquo;s an ugly problem by itself
+for reasons outside the scope of this post, key takeaway is C++ has evolved for more than 30 years but still use a 44 years technology &ldquo;Header files&rdquo;.</p></li>
+</ul>
+
+<h2 id="the-bad">The Bad</h2>
+
+<p>Well the bad thing is that there are more ways to solve the ugly problem. Should programming languages converge to one set of tooling ? I don&rsquo;t think so
+but from a productivity point of view it&rsquo;s far more fun to have a standard way of doing this than tons of ways to do this, technical debt is real.
+If you have to learn something new to use it and especially when it goes in the other direction of intuitive then you might be wasting your time.</p>
+
+<p>The usual suspects of why C++ is bad are memory allocation&hellip; but even then you really don&rsquo;t need to explicitly write <em>new</em> even the C++ hooded sect recommends against
+it.My personal opinion of why C++ is bad is it&rsquo;s too hard to become <a href="https://www.reddit.com/r/rust/comments/a1l3ze/its_time_to_look_in_the_mirror_why_i_am_moving_to/">productive</a>.</p>
+
+<p>At the end of the day, a programming language is just a tool to solve a problem but it&rsquo;s often important to choose the right tool. We&rsquo;re humans after all and we do
+make mistakes that may lead to catastrophic bugs, but when the language helps you defend against such issues then you&rsquo;re more likely to become productive.
+In my case the tool I use should help me move forward not fight me and make me want to throw this out of the window and go herd like in the old days.</p>
+
+<h2 id="takeaways">Takeaways</h2>
+
+<p>My personal key takeaways are these :</p>
+
+<ul>
+<li>First, this is really a personal post. I am not evangelizing for other langues but check them either way .</li>
+<li>Second, your sanity is worth more and yes CMake is difficult to use and yes compiler errors only get easy to decipher with experience.</li>
+<li>Third, productivity is not a particular caracteristic take a look at Github trends for Golang and Rust or even Elixir when a language helps the user, the user helps the language.</li>
+</ul>
+
+<p>Last but not least,
+<img src="https://pics.me.me/look-youve-got-it-all-wrong-you-dont-need-to-14521910.png" alt="think for yourself" /></p>
+</div>
+
+    
+    
+
+    
+
+    
+
+</main>
+
+        <footer>
+
+            <p class="copyright text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://github.com/calintat/minimal">Minimal</a></p>
+
+        </footer>
+       
+    </body>
+
+</html>
+

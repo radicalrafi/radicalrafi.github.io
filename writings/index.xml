@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Writings on </title>
+    <link>https://radicalrafi.github.io/writings/</link>
+    <description>Recent content in Writings on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 05 Jan 2019 11:17:08 +0000</lastBuildDate>
+    
+	<atom:link href="https://radicalrafi.github.io/writings/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>A Blogroll, or my favorite blogs</title>
+      <link>https://radicalrafi.github.io/writings/favorite-blogs/</link>
+      <pubDate>Sat, 05 Jan 2019 11:17:08 +0000</pubDate>
+      
+      <guid>https://radicalrafi.github.io/writings/favorite-blogs/</guid>
+      <description> https://slatestarcodex.com/ https://lesswrong.com/ http://lukemuehlhauser.com/ my hero http://mindingourway.com/ https://colah.github.io/ https://iamtrask.github.io/ http://www.wildml.com/ http://blog.samaltman.com/ https://blog.janestreet.com/ http://cdixon.org/ https://putanumonit.com/  </description>
+    </item>
+    
+    <item>
+      <title>Book Reviews: Mathematics</title>
+      <link>https://radicalrafi.github.io/writings/book-reviews-math/</link>
+      <pubDate>Sat, 05 Jan 2019 11:17:08 +0000</pubDate>
+      
+      <guid>https://radicalrafi.github.io/writings/book-reviews-math/</guid>
+      <description>First semester is over and with it I think it&amp;rsquo;s time to give a review of books I read over it&amp;rsquo;s course with few extra books I liked from previous years. This isn&amp;rsquo;t an amazon review this is just a page that may help a future student start somewhere this my personal opinion about the books and approaches may differ.
+Set Theory I&amp;rsquo;ll point you the MIRI&amp;rsquo;s recommended book Naive Set Theory.</description>
+    </item>
+    
+    <item>
+      <title>Reinventing The Ductape and The Creation of Opensource</title>
+      <link>https://radicalrafi.github.io/writings/ductape-factory/</link>
+      <pubDate>Sat, 22 Sep 2018 11:17:08 +0000</pubDate>
+      
+      <guid>https://radicalrafi.github.io/writings/ductape-factory/</guid>
+      <description>Inventing a better duct tape for a duct-tape solvable situation . Duct tape is one of those inventions that we really don&amp;rsquo;t think about they seem obvious in hindsight ; oh . Like the wheel or the glass or the table , duct tape is an all-things invention that fits in many situations , yet we can&amp;rsquo;t really think of a reinvention of it because it&amp;rsquo;s really at the lowest tier of the inventions pyramid .</description>
+    </item>
+    
+  </channel>
+</rss>
